@@ -31,6 +31,27 @@ function App() {
             </main>
           </form>
         </Dialog>
+        <Dialog targetLabel="Open dropdown" type="flyout">
+          Dropdown content
+        </Dialog>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+          repudiandae saepe fuga laborum sunt facilis quos eius aliquid atque,
+          placeat quasi odit modi voluptate, molestias minima soluta quis, id
+          dignissimos! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Ducimus repudiandae saepe fuga laborum sunt facilis quos eius aliquid
+          atque, placeat quasi odit modi voluptate, molestias minima soluta
+          quis, id dignissimos! Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Ducimus repudiandae saepe fuga laborum sunt facilis
+          quos eius aliquid atque, placeat quasi odit modi voluptate, molestias
+          minima soluta quis, id dignissimos! Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Ducimus repudiandae saepe fuga laborum
+          sunt facilis quos eius aliquid atque, placeat quasi odit modi
+          voluptate, molestias minima soluta quis, id dignissimos! Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Ducimus repudiandae saepe
+          fuga laborum sunt facilis quos eius aliquid atque, placeat quasi odit
+          modi voluptate, molestias minima soluta quis, id dignissimos!
+        </div>
       </main>
     </div>
   );
