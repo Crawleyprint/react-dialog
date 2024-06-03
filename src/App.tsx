@@ -1,4 +1,5 @@
 import './App.css'
+import Dialog from './components/Dialog'
 
 function App() {
   return (
@@ -11,11 +12,13 @@ function App() {
           navigate them with very little effort and they, for the 
           most part, work without javascript.
         </p>
-        <button type="button" className="btn dialog-open" tabIndex={0}>Click to open dialog</button>
         <div className="dialog-value">
           This text will change when you update the dialog.
         </div>
-        <dialog className="dialog">
+        <Dialog 
+          onClose={() => console.log('close dialog')} 
+          targetLabel='Click to open dialog'
+        >
           <header>
             <h1>Dialog title</h1>
           </header>
@@ -29,7 +32,7 @@ function App() {
             </main>
             <button tabIndex={0} className="btn">Close dialog</button>
           </form>
-        </dialog>
+        </Dialog>
       </main>
     </div>
   )
