@@ -30,7 +30,6 @@ function App() {
               </label>
               <input id="text" type="text" />
             </main>
-            <button tabIndex={0} className="btn">Close dialog</button>
           </form>
         </Dialog>
       </main>
