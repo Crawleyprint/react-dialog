@@ -1,34 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div className="container">
+      <main className="content">
+        <h1>HTML native dialogs</h1>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Dialogs are nice. They are a part of the HTML standard,
+          easy to create and accessible. You can use keyboard to 
+          navigate them with very little effort and they, for the 
+          most part, work without javascript.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        <button type="button" className="btn dialog-open" tabIndex={0}>Click to open dialog</button>
+        <div className="dialog-value">
+          This text will change when you update the dialog.
+        </div>
+        <dialog className="dialog">
+          <header>
+            <h1>Dialog title</h1>
+          </header>
+          <form method="dialog">
+            <main>
+              <label htmlFor="text">
+                Type in the text below and it will be shown when you 
+                close the dialog
+              </label>
+              <input id="text" type="text" />
+            </main>
+            <button tabIndex={0} className="btn">Close dialog</button>
+          </form>
+        </dialog>
+      </main>
+    </div>
   )
 }
 
