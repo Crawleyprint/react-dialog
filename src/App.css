@@ -72,6 +72,16 @@ dialog[open] {
     width: 100%;
     margin-block: 2ch;
     padding: 0.5ch;
+
+    &[type="checkbox"] {
+      display: inline;
+      vertical-align: middle;
+      width: auto;
+      position: relative;
+      margin-block: 0;
+      top: -2px;
+      margin-right: 1ch;
+    }
   }
   button {
     border: 0;
@@ -140,4 +150,11 @@ dialog::backdrop {
   dialog[open] {
     opacity: 0;
   }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  height: auto;
+  padding-block: 0.5ch;
 }

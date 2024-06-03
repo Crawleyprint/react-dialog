@@ -1,7 +1,14 @@
+import { ChangeEvent, useState, useRef } from "react";
 import "./App.css";
 import Dialog from "./components/Dialog";
 
 function App() {
+  const previousInputValue = useRef("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [hasInputChanged, setHasInputChanged] = useState<boolean>(false);
+  function updateInput(event: ChangeEvent<HTMLInputElement>) {
+    setInputValue(event.target.value);
+  }
   return (
     <div className="container">
       <main className="content">
@@ -12,10 +19,17 @@ function App() {
           effort and they, for the most part, work without javascript.
         </p>
         <div className="dialog-value">
-          This text will change when you update the dialog.
+          {hasInputChanged
+            ? `You've entered: ${inputValue}`
+            : "This text will change when you update the dialog."}
         </div>
         <Dialog
-          onClose={() => console.log("close dialog")}
+          onClose={() => {
+            if (previousInputValue.current !== inputValue) {
+              previousInputValue.current = inputValue;
+            }
+            setHasInputChanged(previousInputValue.current === inputValue);
+          }}
           targetLabel="Click to open dialog"
         >
           <header>
@@ -26,31 +40,74 @@ function App() {
               <label htmlFor="text">
                 Type in the text below and it will be shown when you close the
                 dialog
-                <input type="text" />
+                <input type="text" onChange={updateInput} value={inputValue} />
               </label>
             </main>
           </form>
         </Dialog>
         <Dialog targetLabel="Open dropdown" type="flyout">
-          Dropdown content
+          <h1>Dropdown</h1>
+          <main>
+            <p>
+              Dialogs can be made to function like fully stylable, accessible
+              dropdown that can be navigable by keyboard and closeable by{" "}
+              <kbd>Esc</kbd>
+            </p>
+            <ul>
+              <li>
+                <label>
+                  <input
+                    tabIndex={0}
+                    type="checkbox"
+                    name="checkbox"
+                    value="Check 1"
+                  />
+                  Checkbox 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    tabIndex={0}
+                    type="checkbox"
+                    name="checkbox"
+                    value="Check 2"
+                  />
+                  Checkbox 2
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    tabIndex={0}
+                    type="checkbox"
+                    name="checkbox"
+                    value="Check 3"
+                  />
+                  Checkbox 3
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    tabIndex={0}
+                    type="checkbox"
+                    name="checkbox"
+                    value="Check 4"
+                  />
+                  Checkbox 4
+                </label>
+              </li>
+            </ul>
+          </main>
         </Dialog>
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-          repudiandae saepe fuga laborum sunt facilis quos eius aliquid atque,
-          placeat quasi odit modi voluptate, molestias minima soluta quis, id
-          dignissimos! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Ducimus repudiandae saepe fuga laborum sunt facilis quos eius aliquid
-          atque, placeat quasi odit modi voluptate, molestias minima soluta
-          quis, id dignissimos! Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Ducimus repudiandae saepe fuga laborum sunt facilis
-          quos eius aliquid atque, placeat quasi odit modi voluptate, molestias
-          minima soluta quis, id dignissimos! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Ducimus repudiandae saepe fuga laborum
-          sunt facilis quos eius aliquid atque, placeat quasi odit modi
-          voluptate, molestias minima soluta quis, id dignissimos! Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Ducimus repudiandae saepe
-          fuga laborum sunt facilis quos eius aliquid atque, placeat quasi odit
-          modi voluptate, molestias minima soluta quis, id dignissimos!
+          <p>
+            This is a proof of concept so don't expect everything to work
+            flawlessly. Treat it as a start of something that can replace the
+            enormous amount of hacks that are currently present in various
+            libraries that are being used today.
+          </p>
         </div>
       </main>
     </div>
