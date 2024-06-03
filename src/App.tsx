@@ -1,4 +1,6 @@
 import { ChangeEvent, useState, useRef } from "react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 import "./App.css";
 import Dialog from "./components/Dialog";
 
@@ -6,6 +8,7 @@ function App() {
   const previousInputValue = useRef("");
   const [inputValue, setInputValue] = useState<string>("");
   const [hasInputChanged, setHasInputChanged] = useState<boolean>(false);
+  const [selected, setSelected] = useState<Date>();
   function updateInput(event: ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
   }
@@ -109,6 +112,10 @@ function App() {
             libraries that are being used today.
           </p>
         </div>
+        <Dialog targetLabel="Open calendar" type="flyout">
+          <DayPicker mode="single" selected={selected} onSelect={setSelected} />
+        </Dialog>
+        <p>Selected Date is: {selected?.toISOString()}</p>
       </main>
     </div>
   );
