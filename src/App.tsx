@@ -27,8 +27,8 @@ function App() {
               <label htmlFor="text">
                 Type in the text below and it will be shown when you 
                 close the dialog
+                <input type="text" />
               </label>
-              <input id="text" type="text" />
             </main>
           </form>
         </Dialog>

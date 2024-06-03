@@ -3,10 +3,16 @@ import type { FC, ReactNode } from 'react';
 
 type DialogProps = {
     targetLabel: string;
+    closeBtnLabel?: string;
     onClose?: () => void;
     children?: ReactNode;
 };
-const Dialog: FC<DialogProps> = ({ targetLabel, children, onClose, }) => {
+const Dialog: FC<DialogProps> = ({ 
+    targetLabel, 
+    closeBtnLabel = 'Close', 
+    children, 
+    onClose, 
+}) => {
     const dialogRef = useRef<HTMLDialogElement>(null);
     function showDialog() {
         if (!dialogRef?.current) return;
@@ -28,7 +34,11 @@ const Dialog: FC<DialogProps> = ({ targetLabel, children, onClose, }) => {
             </button>
             <dialog ref={ dialogRef } className="dialog">
                 {children}
-                <button tabIndex={0} className="btn" onClick={onDialogClose}>Close dialog</button>
+                <button 
+                    tabIndex={0} 
+                    className="btn" 
+                    onClick={onDialogClose}
+                >{closeBtnLabel}</button>
             </dialog>
         </>
     )
