@@ -1,1 +1,1 @@
-export * from './lib/react-dialog';
+export * from './lib/Dialog';

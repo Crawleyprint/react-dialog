@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import ReactDialog from './react-dialog';
+import ReactDialog from './Dialog';
 
 describe('ReactDialog', () => {
   it('should render successfully', () => {
