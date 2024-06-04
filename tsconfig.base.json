@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@crawleyprint/react-dialog": ["packages/react-dialog/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

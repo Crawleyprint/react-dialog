@@ -5,6 +5,8 @@ import NxWelcome from './nx-welcome';
 
 import { Route, Routes, Link } from 'react-router-dom';
 
+import { ReactDialog } from '@crawleyprint/react-dialog';
+
 export function App() {
   return (
     <div>
@@ -22,6 +24,9 @@ export function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
+            <Link to="/react-dialog">ReactDialog</Link>
+          </li>
+          <li>
             <Link to="/page-2">Page 2</Link>
           </li>
         </ul>
@@ -36,6 +41,7 @@ export function App() {
             </div>
           }
         />
+        <Route path="/react-dialog" element={<ReactDialog />} />
         <Route
           path="/page-2"
           element={

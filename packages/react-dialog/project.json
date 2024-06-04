@@ -1,0 +1,9 @@
+{
+  "name": "react-dialog",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/react-dialog/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project react-dialog --web",
+  "targets": {}
+}
