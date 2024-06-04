@@ -1,1 +1,27 @@
 /* Your styles goes here. */
+.container {
+  width: 100dvw;
+  font-size: var(--base-font-size);
+  width: 100%;
+  display: grid;
+  color: var(--accent-dark);
+  grid-template-columns:
+    [start] 1fr
+    [content] minmax(300px, 600px)
+    [right] 1fr;
+}
+.content {
+  grid-column: content;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 2ch;
+}
+
+.isActive {
+  color: red;
+}
+
+.isPending {
+  color: blue;
+}
