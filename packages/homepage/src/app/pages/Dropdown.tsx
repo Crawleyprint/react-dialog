@@ -3,7 +3,7 @@ import { Dialog } from '@crawleyprint/react-dialog';
 export default function DropdownPage() {
   return (
     <>
-      <Dialog targetLabel="Open dropdown" type="flyout">
+      <Dialog targetLabel="Open dropdown" flyout>
         <h1>Dropdown</h1>
         <main>
           <p>

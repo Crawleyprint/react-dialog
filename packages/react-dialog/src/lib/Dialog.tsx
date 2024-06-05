@@ -7,7 +7,7 @@ console.log(styles);
 type DialogProps = {
   targetLabel: string;
   closeBtnLabel?: string;
-  type?: 'dialog' | 'flyout';
+  flyout?: 'up' | 'down' | 'left' | 'bottom' | true;
   onClose?: () => void;
   children?: ReactNode;
   open?: boolean;
@@ -16,10 +16,10 @@ type DialogProps = {
 export const Dialog: FC<DialogProps> = ({
   targetLabel,
   closeBtnLabel = 'Close',
-  type = 'dialog',
   children,
   onClose,
   open = false,
+  flyout = false,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -39,7 +39,7 @@ export const Dialog: FC<DialogProps> = ({
   function showDialog() {
     if (!dialogRef?.current) return;
     dialogRef.current.showModal();
-    if (type === 'flyout') positionFlyout();
+    if (flyout) positionFlyout();
     dialogRef.current.addEventListener('close', onDialogClose);
   }
 
@@ -55,7 +55,7 @@ export const Dialog: FC<DialogProps> = ({
 
     if (open) {
       dialogRef?.current?.showModal();
-      if (type === 'flyout') positionFlyout();
+      if (flyout) positionFlyout();
     }
     return () => {
       window.removeEventListener('resize', positionFlyout);
@@ -68,7 +68,7 @@ export const Dialog: FC<DialogProps> = ({
         ref={triggerRef}
         type="button"
         onClick={showDialog}
-        className={`btn dialog-open ${type}-target`}
+        className={`btn dialog-open ${flyout ? 'flyout-target' : ''}`}
         tabIndex={0}
       >
         {targetLabel}
@@ -76,7 +76,7 @@ export const Dialog: FC<DialogProps> = ({
       <dialog
         ref={dialogRef}
         className={`${styles.dialog}`}
-        style={type === 'flyout' ? { ...position } : { ...{} }}
+        style={flyout ? { ...position } : { ...{} }}
       >
         {children}
         <button tabIndex={0} className="btn" onClick={onDialogClose}>
