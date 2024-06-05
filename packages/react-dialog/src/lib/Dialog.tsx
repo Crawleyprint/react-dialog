@@ -58,7 +58,7 @@ export const Dialog: FC<DialogProps> = ({
       <dialog
         data-testid="dialog-body"
         ref={dialogRef}
-        className={`${css.dialog}`}
+        className={`${css.dialog} ${flyout ? css['flyout-dialog'] : ''}`}
         style={{ ...styles }}
       >
         {children}
