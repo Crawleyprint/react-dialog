@@ -1,7 +1,5 @@
 .dialog {
   box-sizing: border-box;
-  width: max-content;
-  max-width: 350px;
   opacity: 0;
   transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
     display 0.5s ease allow-discrete;

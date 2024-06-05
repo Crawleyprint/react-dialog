@@ -86,14 +86,24 @@ describe('Dialog', () => {
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
     });
   });
-  describe('Dialog should accept width', () => {
-    it('should accept and respect width property as a number', () => {
-      const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close" width={350}>
+  describe('Dialog should accept css properties via style attribute', () => {
+    it('should accept and respect width and height property', () => {
+      render(
+        <Dialog
+          targetLabel="Dropdown"
+          closeBtnLabel="Close"
+          style={{
+            width: '300px',
+            height: '100px',
+          }}
+        >
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
       );
+      const dialog = screen.getByTestId('dialog-body');
+      expect(dialog.style.width).toEqual('300px');
+      expect(dialog.style.height).toEqual('100px');
     });
   });
 });

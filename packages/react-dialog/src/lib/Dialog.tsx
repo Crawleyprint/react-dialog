@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { FC, ReactNode, MouseEvent } from 'react';
+import type { FC, ReactNode, CSSProperties } from 'react';
 
 import css from './react-dialog.module.css';
 
@@ -10,8 +10,10 @@ type DialogProps = {
   onClose?: () => void;
   children?: ReactNode;
   open?: boolean;
-  width?: string | number;
+  style?: CSSProperties;
 };
+
+const defaultStyle = {};
 
 export const Dialog: FC<DialogProps> = ({
   targetLabel,
@@ -20,11 +22,15 @@ export const Dialog: FC<DialogProps> = ({
   onClose,
   open = false,
   flyout = false,
-  width = 'auto',
+  style = defaultStyle,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const [styles, setStyles] = useState({ top: 0, left: 0, margin: 0 });
+  const [styles, setStyles] = useState<Record<string, unknown>>({
+    top: 0,
+    left: 0,
+    ...style,
+  });
 
   function positionFlyout() {
     if (!triggerRef.current) return;
@@ -34,25 +40,27 @@ export const Dialog: FC<DialogProps> = ({
     const t = top + height + 10;
     let l = left - dialogWidth / 2;
     if (l < 0) l = 0;
-    setStyles((oldStyles) => ({ ...oldStyles, top: t, left: l }));
+    setStyles((oldStyles) => ({ ...oldStyles, top: t, left: l, margin: 0 }));
   }
 
   function showDialog() {
     if (!dialogRef?.current) return;
     dialogRef.current?.showModal();
     if (flyout) positionFlyout();
-    dialogRef.current.addEventListener('close', onDialogClose);
+    dialogRef.current.addEventListener('close', hideDialog);
   }
 
-  function onDialogClose() {
+  function hideDialog() {
     onClose?.();
     dialogRef?.current?.close();
-    dialogRef?.current?.removeEventListener('close', onDialogClose);
+    dialogRef?.current?.removeEventListener('close', hideDialog);
   }
 
   useEffect(() => {
     window.addEventListener('resize', positionFlyout);
     window.addEventListener('scroll', positionFlyout);
+
+    setStyles((oldStyles) => ({ ...oldStyles, style }));
 
     if (open) {
       dialogRef?.current?.showModal();
@@ -62,8 +70,8 @@ export const Dialog: FC<DialogProps> = ({
       window.removeEventListener('resize', positionFlyout);
       window.removeEventListener('scroll', positionFlyout);
     };
-    setStyles((oldStyles) => ({ ...oldStyles, width }));
-  }, [width]);
+  }, []);
+
   return (
     <div>
       <button
@@ -80,13 +88,13 @@ export const Dialog: FC<DialogProps> = ({
         data-testid="dialog-body"
         ref={dialogRef}
         className={`${css.dialog}`}
-        style={flyout ? { ...styles } : { ...{} }}
+        style={{ ...styles }}
       >
         {children}
         <button
           tabIndex={0}
           className="btn"
-          onClick={onDialogClose}
+          onClick={hideDialog}
           data-testid="dialog-close"
         >
           {closeBtnLabel}
