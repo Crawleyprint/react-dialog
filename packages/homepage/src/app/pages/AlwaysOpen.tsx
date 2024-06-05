@@ -4,7 +4,7 @@ export default function AlwaysOpen() {
   return (
     <>
       <Dialog
-        open
+        isOpen
         targetLabel="Open calendar"
         style={{
           width: '100ch',

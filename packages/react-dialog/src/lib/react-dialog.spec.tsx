@@ -36,7 +36,7 @@ describe('Dialog', () => {
     });
     it('should be visible if "open" attribute was provided', () => {
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" open closeBtnLabel="Close">
+        <Dialog targetLabel="Dropdown" isOpen closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -45,6 +45,19 @@ describe('Dialog', () => {
       expect(screen.getByTestId('dialog-trigger')).toBeVisible();
       expect(screen.getByTestId('dialog-close')).toBeVisible();
       expect(screen.getByTestId('dialog-body')).toBeVisible();
+    });
+    it('should be able to close initially open dialog', async () => {
+      const user = userEvent.setup();
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" isOpen closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      expect(baseElement).toBeInTheDocument();
+      expect(screen.getByTestId('dialog-close')).toBeVisible();
+      await user.click(screen.getByTestId('dialog-close'));
+      expect(screen.getByTestId('dialog-body')).not.toBeVisible();
     });
     it('should display dialog on trigger click', async () => {
       const user = userEvent.setup();

@@ -4,19 +4,21 @@ import css from '../app.module.css';
 
 export default function StandaloneHooks() {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { open, close } = useDialog();
+  const targetRef = useRef<HTMLButtonElement>(null);
+  const { open, close, styles } = useDialog({});
+
   function show() {
-    open(dialogRef.current);
+    open(dialogRef.current, targetRef.current);
   }
   function hide() {
-    close(dialogRef.current);
+    close();
   }
   return (
     <div>
-      <button className="btn" onClick={show}>
+      <button className="btn" onClick={show} ref={targetRef}>
         Open with hook
       </button>
-      <dialog ref={dialogRef} className={css.dialog}>
+      <dialog ref={dialogRef} className={css.dialog} style={styles}>
         <p>Dialog content</p>
         <button onClick={hide} className="btn">
           Close with hook

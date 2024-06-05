@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import type { FC, ReactNode, CSSProperties } from 'react';
 
 import css from './react-dialog.module.css';
+import { useDialog } from './hooks/useDialog';
 
 type DialogProps = {
   targetLabel: string;
   closeBtnLabel?: string;
-  flyout?: 'up' | 'down' | 'left' | 'bottom' | true;
+  flyout?: 'up' | 'down' | 'left' | 'bottom';
   onClose?: () => void;
   children?: ReactNode;
-  open?: boolean;
+  isOpen?: boolean;
   style?: CSSProperties;
 };
 
@@ -19,58 +20,30 @@ export const Dialog: FC<DialogProps> = ({
   targetLabel,
   closeBtnLabel = 'Close',
   children,
-  onClose,
-  open = false,
-  flyout = false,
+  onClose = () => {},
+  isOpen = false,
+  flyout = undefined,
   style = defaultStyle,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const [styles, setStyles] = useState<Record<string, unknown>>({
-    top: 0,
-    left: 0,
-    ...style,
+  const { open, close, styles, openStatus, setOpenStatus } = useDialog({
+    style,
+    closeFn: onClose,
   });
 
-  function positionFlyout() {
-    if (!triggerRef.current) return;
-    if (!dialogRef.current) return;
-    const { top, left, height } = triggerRef.current.getBoundingClientRect();
-    const { width: dialogWidth } = dialogRef.current.getBoundingClientRect();
-    const t = top + height + 10;
-    let l = left - dialogWidth / 2;
-    if (l < 0) l = 0;
-    setStyles((oldStyles) => ({ ...oldStyles, top: t, left: l, margin: 0 }));
-  }
-
   function showDialog() {
-    if (!dialogRef?.current) return;
-    dialogRef.current?.showModal();
-    if (flyout) positionFlyout();
-    dialogRef.current.addEventListener('close', hideDialog);
+    open(dialogRef.current, triggerRef.current);
   }
 
   function hideDialog() {
-    onClose?.();
-    dialogRef?.current?.close();
-    dialogRef?.current?.removeEventListener('close', hideDialog);
+    close();
   }
 
   useEffect(() => {
-    window.addEventListener('resize', positionFlyout);
-    window.addEventListener('scroll', positionFlyout);
-
-    setStyles((oldStyles) => ({ ...oldStyles, style }));
-
-    if (open) {
-      dialogRef?.current?.showModal();
-      if (flyout) positionFlyout();
-    }
-    return () => {
-      window.removeEventListener('resize', positionFlyout);
-      window.removeEventListener('scroll', positionFlyout);
-    };
-  }, []);
+    setOpenStatus(isOpen);
+    openStatus && showDialog();
+  }, [openStatus]);
 
   return (
     <div>
