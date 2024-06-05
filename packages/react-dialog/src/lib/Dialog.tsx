@@ -42,6 +42,7 @@ export const Dialog: FC<DialogProps> = ({
     if (type === 'flyout') positionFlyout();
     dialogRef.current.addEventListener('close', onDialogClose);
   }
+
   function onDialogClose() {
     onClose?.();
     dialogRef?.current?.close();
@@ -52,9 +53,9 @@ export const Dialog: FC<DialogProps> = ({
     window.addEventListener('resize', positionFlyout);
     window.addEventListener('scroll', positionFlyout);
 
-    if (open && type === 'flyout') {
+    if (open) {
       dialogRef?.current?.showModal();
-      positionFlyout();
+      if (type === 'flyout') positionFlyout();
     }
     return () => {
       window.removeEventListener('resize', positionFlyout);

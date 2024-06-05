@@ -8,38 +8,10 @@ import Index from './pages/Index';
 import DropdownPage from './pages/Dropdown';
 import EmbedAnything from './pages/EmbedAnything';
 import AlwaysOpen from './pages/AlwaysOpen';
-
-const getNavLinkClasses = ({
-  isActive,
-  isPending,
-}: {
-  isActive: boolean;
-  isPending: boolean;
-}) => {
-  let classes = [styles.navLink];
-  if (isActive) {
-    classes.push(styles.isActive);
-  }
-
-  if (isPending) {
-    classes.push(styles.isPending);
-  }
-  return classes.join(' ');
-};
+import { navRoutes } from './consts';
+import { getNavLinkClasses } from './utils/navigation';
 
 export function App() {
-  const navRoutes = [
-    {
-      url: '/',
-      title: 'Classic with backdrop',
-    },
-    {
-      url: '/dropdown',
-      title: 'Dropdown-like',
-    },
-    { url: '/embed-elements', title: 'Embed anything' },
-    { url: '/open-by-default', title: 'Open by default' },
-  ];
   return (
     <div className={styles['container']}>
       <main className={styles.content}>
@@ -49,9 +21,9 @@ export function App() {
           and accessible. You can use keyboard to navigate them with very little
           effort and they, for the most part, work without javascript.
         </p>
-        <nav>
+        <nav className={styles.navigation} role="navigation">
           {navRoutes.map(({ url, title }) => (
-            <NavLink key={url} className={getNavLinkClasses} to={url}>
+            <NavLink key={url} className={getNavLinkClasses(styles)} to={url}>
               {title}
             </NavLink>
           ))}

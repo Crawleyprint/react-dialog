@@ -25,3 +25,20 @@
 .isPending {
   color: blue;
 }
+
+.navigation {
+  display: flex;
+  gap: 0.5ch;
+
+  a {
+    padding: 0.5ch;
+    background: var(--default-prominent);
+    color: var(--accent-dark);
+    text-decoration: none;
+    border-radius: 3px 0px 3px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
