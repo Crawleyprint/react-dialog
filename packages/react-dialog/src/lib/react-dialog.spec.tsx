@@ -4,45 +4,96 @@ import userEvent from '@testing-library/user-event';
 import { Dialog } from './Dialog';
 
 describe('Dialog', () => {
-  it('should render base element, trigger and close button', () => {
-    const { baseElement } = render(
-      <Dialog targetLabel="Dropdown" closeBtnLabel="Close" />
-    );
-    expect(baseElement).toBeInTheDocument();
-    expect(screen.getByText('Dropdown')).toBeInTheDocument();
+  describe('Basic functionality', () => {
+    it('should render base element, trigger and close button', () => {
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close" />
+      );
+      expect(baseElement).toBeInTheDocument();
+      expect(screen.getByText('Dropdown')).toBeInTheDocument();
+    });
+    it('should render children elements correctly', () => {
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      expect(baseElement).toBeInTheDocument();
+      expect(baseElement.getElementsByTagName('p').length).toEqual(2);
+    });
+    it('should not have the correct visibility for each of the elements', () => {
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      expect(baseElement).toBeInTheDocument();
+      expect(screen.getByTestId('dialog-trigger')).toBeVisible();
+      expect(screen.getByTestId('dialog-close')).not.toBeVisible();
+      expect(screen.getByTestId('dialog-body')).not.toBeVisible();
+    });
+    it('should be visible if "open" attribute was provided', () => {
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" open closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      expect(baseElement).toBeInTheDocument();
+      expect(screen.getByTestId('dialog-trigger')).toBeVisible();
+      expect(screen.getByTestId('dialog-close')).toBeVisible();
+      expect(screen.getByTestId('dialog-body')).toBeVisible();
+    });
+    it('should display dialog on trigger click', async () => {
+      const user = userEvent.setup();
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      const trigger = screen.getByTestId('dialog-trigger');
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
+    });
+    it('should close on Esc', async () => {
+      const user = userEvent.setup();
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      const trigger = screen.getByTestId('dialog-trigger');
+      await user.keyboard('Escape');
+      expect(baseElement.querySelector('dialog')).not.toBeVisible();
+    });
+    it('should close dialog on close button click', async () => {
+      const user = userEvent.setup();
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      const trigger = screen.getByTestId('dialog-trigger');
+      const closeBtn = screen.getByTestId('dialog-close');
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
+      await user.click(closeBtn);
+      expect(baseElement.querySelector('dialog')).not.toBeVisible();
+    });
   });
-  it('should render children elements correctly', () => {
-    const { baseElement } = render(
-      <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
-        <p>Child node 1</p>
-        <p>Child node 2</p>
-      </Dialog>
-    );
-    expect(baseElement).toBeInTheDocument();
-    expect(baseElement.getElementsByTagName('p').length).toEqual(2);
-  });
-  it('should not have the correct visibility for each of the elements', () => {
-    const { baseElement } = render(
-      <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
-        <p>Child node 1</p>
-        <p>Child node 2</p>
-      </Dialog>
-    );
-    expect(baseElement).toBeInTheDocument();
-    expect(screen.getByTestId('dialog-trigger')).toBeVisible();
-    expect(screen.getByTestId('dialog-close')).not.toBeVisible();
-    expect(screen.getByTestId('dialog-body')).not.toBeVisible();
-  });
-  it('should display dialog on trigger click', async () => {
-    const user = userEvent.setup();
-    const { baseElement } = render(
-      <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
-        <p>Child node 1</p>
-        <p>Child node 2</p>
-      </Dialog>
-    );
-    const trigger = screen.getByTestId('dialog-trigger');
-    await user.click(trigger);
-    expect(baseElement.querySelector('dialog')).toBeVisible();
+  describe('Dialog should accept width', () => {
+    it('should accept and respect width property as a number', () => {
+      const { baseElement } = render(
+        <Dialog targetLabel="Dropdown" closeBtnLabel="Close" width={350}>
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+    });
   });
 });

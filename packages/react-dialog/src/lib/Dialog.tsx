@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FC, ReactNode, MouseEvent } from 'react';
 
-import styles from './react-dialog.module.css';
-console.log(styles);
+import css from './react-dialog.module.css';
 
 type DialogProps = {
   targetLabel: string;
@@ -11,6 +10,7 @@ type DialogProps = {
   onClose?: () => void;
   children?: ReactNode;
   open?: boolean;
+  width?: string | number;
 };
 
 export const Dialog: FC<DialogProps> = ({
@@ -20,10 +20,11 @@ export const Dialog: FC<DialogProps> = ({
   onClose,
   open = false,
   flyout = false,
+  width = 'auto',
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const [position, setPosition] = useState({ top: 0, left: 0, margin: 0 });
+  const [styles, setStyles] = useState({ top: 0, left: 0, margin: 0 });
 
   function positionFlyout() {
     if (!triggerRef.current) return;
@@ -33,7 +34,7 @@ export const Dialog: FC<DialogProps> = ({
     const t = top + height + 10;
     let l = left - dialogWidth / 2;
     if (l < 0) l = 0;
-    setPosition({ top: t, left: l, margin: 0 });
+    setStyles((oldStyles) => ({ ...oldStyles, top: t, left: l }));
   }
 
   function showDialog() {
@@ -61,7 +62,8 @@ export const Dialog: FC<DialogProps> = ({
       window.removeEventListener('resize', positionFlyout);
       window.removeEventListener('scroll', positionFlyout);
     };
-  }, []);
+    setStyles((oldStyles) => ({ ...oldStyles, width }));
+  }, [width]);
   return (
     <div>
       <button
@@ -77,8 +79,8 @@ export const Dialog: FC<DialogProps> = ({
       <dialog
         data-testid="dialog-body"
         ref={dialogRef}
-        className={`${styles.dialog}`}
-        style={flyout ? { ...position } : { ...{} }}
+        className={`${css.dialog}`}
+        style={flyout ? { ...styles } : { ...{} }}
       >
         {children}
         <button
