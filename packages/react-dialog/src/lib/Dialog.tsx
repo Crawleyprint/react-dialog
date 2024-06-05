@@ -27,21 +27,20 @@ export const Dialog: FC<DialogProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const { open, close, styles } = useDialog({
+  const { openDialog, closeDialog, styles } = useDialog({
     dialog: dialogRef.current,
     trigger: triggerRef.current,
     style,
     flyout,
     isOpen,
-    closeFn: onClose,
   });
 
   function showDialog() {
-    open();
+    openDialog();
   }
 
   function hideDialog() {
-    close();
+    closeDialog();
   }
 
   return (
@@ -51,7 +50,7 @@ export const Dialog: FC<DialogProps> = ({
         ref={triggerRef}
         type="button"
         onClick={showDialog}
-        className={`btn dialog-open ${flyout ? 'flyout-target' : ''}`}
+        className={`btn dialog-open}`}
         tabIndex={0}
       >
         {targetLabel}

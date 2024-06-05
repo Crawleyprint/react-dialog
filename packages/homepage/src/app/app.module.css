@@ -19,7 +19,8 @@
 }
 
 .isActive {
-  color: red;
+  background-color: var(--accent-dark) !important;
+  color: white !important;
 }
 
 .isPending {
@@ -29,7 +30,9 @@
 .navigation {
   display: flex;
   gap: 0.5ch;
-
+  border-bottom: 1px solid var(--accent-dark);
+  margin-inline: -1ch;
+  padding-inline: 1ch;
   a {
     padding: 0.5ch;
     background: var(--default-prominent);

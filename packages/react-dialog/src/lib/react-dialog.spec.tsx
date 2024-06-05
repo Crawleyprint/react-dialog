@@ -98,23 +98,6 @@ describe('Dialog', () => {
       await user.click(closeBtn);
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
     });
-    it('should call onClose function', async () => {
-      const onClose = vi.fn();
-      const user = userEvent.setup();
-      const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close" onClose={onClose}>
-          <p>Child node 1</p>
-          <p>Child node 2</p>
-        </Dialog>
-      );
-      const trigger = screen.getByTestId('dialog-trigger');
-      const closeBtn = screen.getByTestId('dialog-close');
-      await user.click(trigger);
-      expect(baseElement.querySelector('dialog')).toBeVisible();
-      await user.click(closeBtn);
-      expect(baseElement.querySelector('dialog')).not.toBeVisible();
-      expect(onClose).toHaveBeenCalledTimes(1);
-    });
   });
   describe('Dialog should accept css properties via style attribute', () => {
     it('should accept and respect width and height property', () => {
