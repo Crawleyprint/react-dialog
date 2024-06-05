@@ -7,7 +7,7 @@ export default function AlwaysOpen() {
         isOpen
         targetLabel="Open calendar"
         style={{
-          width: '100ch',
+          width: '50ch',
         }}
       >
         <p>

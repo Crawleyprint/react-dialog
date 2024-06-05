@@ -5,10 +5,13 @@ import css from '../app.module.css';
 export default function StandaloneHooks() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const targetRef = useRef<HTMLButtonElement>(null);
-  const { open, close, styles } = useDialog({});
+  const { open, close, styles } = useDialog({
+    dialog: dialogRef.current,
+    trigger: targetRef.current,
+  });
 
   function show() {
-    open(dialogRef.current, targetRef.current);
+    open();
   }
   function hide() {
     close();

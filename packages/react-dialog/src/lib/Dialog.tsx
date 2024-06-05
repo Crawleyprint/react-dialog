@@ -7,7 +7,7 @@ import { useDialog } from './hooks/useDialog';
 type DialogProps = {
   targetLabel: string;
   closeBtnLabel?: string;
-  flyout?: 'up' | 'down' | 'left' | 'bottom';
+  flyout?: 'up' | 'down' | 'left' | 'right';
   onClose?: () => void;
   children?: ReactNode;
   isOpen?: boolean;
@@ -27,23 +27,22 @@ export const Dialog: FC<DialogProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const { open, close, styles, openStatus, setOpenStatus } = useDialog({
+  const { open, close, styles } = useDialog({
+    dialog: dialogRef.current,
+    trigger: triggerRef.current,
     style,
+    flyout,
+    isOpen,
     closeFn: onClose,
   });
 
   function showDialog() {
-    open(dialogRef.current, triggerRef.current);
+    open();
   }
 
   function hideDialog() {
     close();
   }
-
-  useEffect(() => {
-    setOpenStatus(isOpen);
-    openStatus && showDialog();
-  }, [openStatus]);
 
   return (
     <div>
