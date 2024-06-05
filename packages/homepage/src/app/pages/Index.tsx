@@ -8,13 +8,9 @@ export default function Index() {
   function updateInput(event: ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
   }
+
   return (
     <>
-      <div className="dialog-value">
-        {hasInputChanged
-          ? `You've entered: ${inputValue}`
-          : 'This text will change when you update the dialog.'}
-      </div>
       <Dialog
         onClose={() => {
           if (previousInputValue.current !== inputValue) {
@@ -37,6 +33,13 @@ export default function Index() {
           </main>
         </form>
       </Dialog>
+      <div className="dialog-value">
+        <p>
+          {hasInputChanged
+            ? `You've entered: ${inputValue || 'nothing'}`
+            : 'This text will change when you update the dialog.'}
+        </p>
+      </div>
     </>
   );
 }

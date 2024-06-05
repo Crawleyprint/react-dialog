@@ -5,7 +5,7 @@ export default function AlwaysOpen() {
     <>
       <Dialog
         isOpen
-        targetLabel="Open calendar"
+        targetLabel="Open again"
         style={{
           width: '50ch',
         }}

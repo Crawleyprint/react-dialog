@@ -5,16 +5,16 @@ import css from '../app.module.css';
 export default function StandaloneHooks() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const targetRef = useRef<HTMLButtonElement>(null);
-  const { open, close, styles } = useDialog({
+  const { openDialog, closeDialog, styles } = useDialog({
     dialog: dialogRef.current,
     trigger: targetRef.current,
   });
 
   function show() {
-    open();
+    openDialog();
   }
   function hide() {
-    close();
+    closeDialog();
   }
   return (
     <div>
@@ -24,9 +24,14 @@ export default function StandaloneHooks() {
       <dialog ref={dialogRef} className={css.dialog} style={styles}>
         <p>Dialog content</p>
         <button onClick={hide} className="btn">
-          Close with hook
+          Close button implemented with hook
         </button>
       </dialog>
+      <p>
+        All other examples have been done using `Dialog` component from this
+        repository. This one, however, is composed using regular HTML elements
+        and hooks.
+      </p>
     </div>
   );
 }

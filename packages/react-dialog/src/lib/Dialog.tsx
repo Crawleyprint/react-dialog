@@ -40,6 +40,7 @@ export const Dialog: FC<DialogProps> = ({
   }
 
   function hideDialog() {
+    onClose?.();
     closeDialog();
   }
 
