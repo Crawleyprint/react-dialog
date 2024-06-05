@@ -1,6 +1,12 @@
 # react-dialog
 
-This library was generated with [Nx](https://nx.dev).
+TODO:
+
+[ ] Separate confirm and cancel actions
+[ ] Extract and export hooks
+[ ] Write examples
+[ ] Different flyout directions
+[ ] Allow className passing instead of hardcoded CSS
 
 ## Running unit tests
 
