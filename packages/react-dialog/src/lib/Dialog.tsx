@@ -38,7 +38,7 @@ export const Dialog: FC<DialogProps> = ({
 
   function showDialog() {
     if (!dialogRef?.current) return;
-    dialogRef.current.showModal();
+    dialogRef.current?.showModal();
     if (flyout) positionFlyout();
     dialogRef.current.addEventListener('close', onDialogClose);
   }
@@ -65,6 +65,7 @@ export const Dialog: FC<DialogProps> = ({
   return (
     <div>
       <button
+        data-testid="dialog-trigger"
         ref={triggerRef}
         type="button"
         onClick={showDialog}
@@ -74,12 +75,18 @@ export const Dialog: FC<DialogProps> = ({
         {targetLabel}
       </button>
       <dialog
+        data-testid="dialog-body"
         ref={dialogRef}
         className={`${styles.dialog}`}
         style={flyout ? { ...position } : { ...{} }}
       >
         {children}
-        <button tabIndex={0} className="btn" onClick={onDialogClose}>
+        <button
+          tabIndex={0}
+          className="btn"
+          onClick={onDialogClose}
+          data-testid="dialog-close"
+        >
           {closeBtnLabel}
         </button>
       </dialog>

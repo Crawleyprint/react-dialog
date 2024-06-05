@@ -54,7 +54,7 @@ export default defineConfig({
     cache: {
       dir: '../../node_modules/.vitest/packages/react-dialog',
     },
-    environment: 'jsdom',
+    environment: 'happy-dom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 
     reporters: ['default'],
