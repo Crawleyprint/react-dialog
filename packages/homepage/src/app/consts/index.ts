@@ -9,4 +9,5 @@ export const navRoutes = [
   },
   { url: '/embed-elements', title: 'Embed anything' },
   { url: '/open-by-default', title: 'Open by default' },
+  { url: '/hooks', title: 'Standalone hooks' },
 ];

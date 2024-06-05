@@ -10,6 +10,7 @@ import EmbedAnything from './pages/EmbedAnything';
 import AlwaysOpen from './pages/AlwaysOpen';
 import { navRoutes } from './consts';
 import { getNavLinkClasses } from './utils/navigation';
+import StandaloneHooks from './pages/StandaloneHooks';
 
 export function App() {
   return (
@@ -33,6 +34,7 @@ export function App() {
           <Route path="/dropdown" element={<DropdownPage />} />
           <Route path="/embed-elements" element={<EmbedAnything />} />
           <Route path="/open-by-default" element={<AlwaysOpen />} />
+          <Route path="/hooks" element={<StandaloneHooks />} />
         </Routes>
       </main>
     </div>
