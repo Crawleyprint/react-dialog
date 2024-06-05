@@ -8,7 +8,7 @@
     "types": ["vite/client", "vitest"]
   },
   "files": [],
-  "include": [],
+  "include": ["jest-dom.d.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

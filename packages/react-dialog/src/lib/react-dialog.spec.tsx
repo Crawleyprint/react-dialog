@@ -1,10 +1,13 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import ReactDialog from './Dialog';
+import { Dialog } from './Dialog';
 
 describe('ReactDialog', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ReactDialog />);
-    expect(baseElement).toBeTruthy();
+    const { baseElement } = render(
+      <Dialog targetLabel="Dropdown" closeBtnLabel="Close" />
+    );
+    expect(baseElement).toBeInTheDocument();
+    expect(screen.getByText('Dropdown')).toBeInTheDocument();
   });
 });
