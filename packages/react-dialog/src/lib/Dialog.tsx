@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import type { FC, ReactNode, CSSProperties } from 'react';
 
 import css from './react-dialog.module.css';
