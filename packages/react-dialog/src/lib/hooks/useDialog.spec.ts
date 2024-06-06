@@ -11,7 +11,7 @@ describe.skip('useDialog() hook', () => {
     const trigger = document.createElement('button');
     const dialog = document.createElement('dialog');
     const { result } = renderHook(useDialog, {
-      initialProps: { dialog, trigger, flyout: 'down', isOpen: true },
+      initialProps: { dialog, trigger, placement: 'down', isOpen: true },
     });
     expect(Object.keys(result.current.styles).sort()).toEqual([
       'left',

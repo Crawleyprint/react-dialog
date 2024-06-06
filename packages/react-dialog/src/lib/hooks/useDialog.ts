@@ -16,7 +16,7 @@ type useDialogArgumentsType = {
   style?: CSSProperties;
   arrowEl?: HTMLElement | null;
   isOpen?: boolean;
-  flyout?: 'up' | 'down' | 'left' | 'right';
+  placement?: 'up' | 'down' | 'left' | 'right';
 };
 
 export function useDialog({
@@ -24,7 +24,7 @@ export function useDialog({
   trigger,
   style = {},
   arrowEl = null,
-  flyout = undefined,
+  placement = undefined,
   isOpen = false,
 }: useDialogArgumentsType) {
   const [styles, setStyles] = useState<CSSProperties>({ ...style });
@@ -34,14 +34,14 @@ export function useDialog({
   const { refs, floatingStyles, middlewareData } = useFloating({
     placement: 'bottom',
     middleware: [
+      arrow({
+        element: arrowRef.current,
+      }),
       shift({
         padding: 10,
       }),
       offset(10),
       flip(),
-      arrow({
-        element: arrowRef.current,
-      }),
       size({
         padding: 10,
         apply({ availableHeight, availableWidth }) {
@@ -57,6 +57,10 @@ export function useDialog({
     ],
     whileElementsMounted: autoUpdate,
   });
+
+  useEffect(() => {
+    console.log('middleware data changed', middlewareData);
+  }, [middlewareData]);
 
   const updateReferences = useCallback(() => {
     refs.setFloating(dialogRef.current);
@@ -78,7 +82,6 @@ export function useDialog({
     dialogRef.current = dialog;
     triggerRef.current = trigger;
     arrowRef.current = arrowEl;
-    console.log(arrowEl);
   }, [dialog, trigger, arrowEl]);
 
   useEffect(() => {
@@ -89,7 +92,7 @@ export function useDialog({
   return {
     openDialog,
     closeDialog,
-    styles: flyout ? { ...styles, ...floatingStyles } : styles,
+    styles: placement ? { ...styles, ...floatingStyles } : styles,
     arrowStyles: {
       left: middlewareData.arrow?.x,
     },

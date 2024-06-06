@@ -7,7 +7,7 @@ import { useDialog } from './hooks/useDialog';
 type DialogProps = {
   targetLabel: string;
   closeBtnLabel?: string;
-  flyout?: 'up' | 'down' | 'left' | 'right';
+  placement?: 'up' | 'down' | 'left' | 'right';
   onClose?: () => void;
   children?: ReactNode;
   isOpen?: boolean;
@@ -22,7 +22,7 @@ export const Dialog: FC<DialogProps> = ({
   children,
   onClose = () => {},
   isOpen = false,
-  flyout = undefined,
+  placement = undefined,
   style = defaultStyle,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -33,13 +33,12 @@ export const Dialog: FC<DialogProps> = ({
     dialog: dialogRef.current,
     trigger: triggerRef.current,
     style,
-    flyout,
+    placement,
     isOpen,
     arrowEl: arrowEl.current,
   });
 
   function showDialog() {
-    console.log(arrowStyles);
     openDialog();
   }
 
@@ -62,14 +61,16 @@ export const Dialog: FC<DialogProps> = ({
       <dialog
         data-testid="dialog-body"
         ref={dialogRef}
-        className={`${css.dialog} ${flyout ? css['flyout-dialog'] : ''}`}
+        className={`${css.dialog} ${placement ? css['flyout-dialog'] : ''}`}
         style={{ ...styles }}
       >
-        <span
-          className={css.arrow}
-          ref={arrowEl}
-          style={{ ...arrowStyles }}
-        ></span>
+        {placement && (
+          <span
+            className={css.arrow}
+            ref={arrowEl}
+            style={{ ...arrowStyles }}
+          ></span>
+        )}
         {children}
         <button
           tabIndex={0}
