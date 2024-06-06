@@ -6,7 +6,7 @@
   background-color: var(--default-prominent);
   border: 0;
   border-radius: 8px;
-  box-shadow: 0 0 1rem var(--accent-dark);
+  overflow: visible;
 }
 .dialog[open]::backdrop {
   opacity: 0.8;
@@ -35,4 +35,13 @@
   .dialog[open] {
     opacity: 0;
   }
+}
+
+.arrow {
+  position: absolute;
+  background-color: red;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  top: -10px;
 }

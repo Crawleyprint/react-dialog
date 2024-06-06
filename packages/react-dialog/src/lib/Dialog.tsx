@@ -27,16 +27,19 @@ export const Dialog: FC<DialogProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const arrowEl = useRef<HTMLElement>(null);
 
-  const { openDialog, closeDialog, styles } = useDialog({
+  const { openDialog, closeDialog, styles, arrowStyles } = useDialog({
     dialog: dialogRef.current,
     trigger: triggerRef.current,
     style,
     flyout,
     isOpen,
+    arrowEl: arrowEl.current,
   });
 
   function showDialog() {
+    console.log(arrowStyles);
     openDialog();
   }
 
@@ -62,6 +65,11 @@ export const Dialog: FC<DialogProps> = ({
         className={`${css.dialog} ${flyout ? css['flyout-dialog'] : ''}`}
         style={{ ...styles }}
       >
+        <span
+          className={css.arrow}
+          ref={arrowEl}
+          style={{ ...arrowStyles }}
+        ></span>
         {children}
         <button
           tabIndex={0}

@@ -18,6 +18,7 @@ export default function Index() {
           }
           setHasInputChanged(previousInputValue.current === inputValue);
         }}
+        style={{ width: 600, height: 400 }}
         targetLabel="Click to open dialog"
       >
         <header>

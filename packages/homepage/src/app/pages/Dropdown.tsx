@@ -12,50 +12,19 @@ export default function DropdownPage() {
             <kbd>Esc</kbd>
           </p>
           <ul>
-            <li>
-              <label>
-                <input
-                  tabIndex={0}
-                  type="checkbox"
-                  name="checkbox"
-                  value="Check 1"
-                />
-                Checkbox 1
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  tabIndex={0}
-                  type="checkbox"
-                  name="checkbox"
-                  value="Check 2"
-                />
-                Checkbox 2
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  tabIndex={0}
-                  type="checkbox"
-                  name="checkbox"
-                  value="Check 3"
-                />
-                Checkbox 3
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  tabIndex={0}
-                  type="checkbox"
-                  name="checkbox"
-                  value="Check 4"
-                />
-                Checkbox 4
-              </label>
-            </li>
+            {Array.from(new Array(5), (_, index) => (
+              <li key={Math.random()}>
+                <label>
+                  <input
+                    tabIndex={0}
+                    type="checkbox"
+                    name="checkbox"
+                    value={`Check ${index}`}
+                  />
+                  Checkbox 1
+                </label>
+              </li>
+            ))}
           </ul>
         </main>
       </Dialog>
