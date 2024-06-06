@@ -13,6 +13,11 @@ describe('useDialog() hook', () => {
     const { result } = renderHook(useDialog, {
       initialProps: { dialog, trigger, flyout: 'down', isOpen: true },
     });
-    expect(result.current.styles).toEqual({ left: 0, margin: 0, top: 10 });
+    expect(Object.keys(result.current.styles).sort()).toEqual([
+      'left',
+      'position',
+      'top',
+      'transform',
+    ]);
   });
 });

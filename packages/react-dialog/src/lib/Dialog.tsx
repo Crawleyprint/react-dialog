@@ -27,6 +27,7 @@ export const Dialog: FC<DialogProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
   const { openDialog, closeDialog, styles } = useDialog({
     dialog: dialogRef.current,
     trigger: triggerRef.current,
@@ -43,7 +44,6 @@ export const Dialog: FC<DialogProps> = ({
     onClose?.();
     closeDialog();
   }
-
   return (
     <div>
       <button

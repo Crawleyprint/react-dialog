@@ -1,4 +1,5 @@
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { useFloating, flip, size, autoUpdate } from '@floating-ui/react-dom';
+import { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 type useDialogArgumentsType = {
   dialog: HTMLDialogElement | null;
@@ -15,68 +16,40 @@ export function useDialog({
   flyout = undefined,
   isOpen = false,
 }: useDialogArgumentsType) {
-  const dialogRef = useRef<HTMLDialogElement | null>(dialog);
-  const triggerRef = useRef<HTMLElement | null>(trigger);
-  const [styles, setStyles] = useState<Record<string, unknown>>({
-    ...style,
+  const { refs, floatingStyles } = useFloating({
+    placement: 'bottom',
+    middleware: [flip(), size()],
+    whileElementsMounted: autoUpdate,
   });
 
-  function openDialog() {
-    if (!dialogRef.current || !triggerRef.current) return;
-    dialogRef.current.showModal();
-    if (flyout) positionFlyout();
-  }
+  const [_, setStyles] = useState<CSSProperties>({});
 
-  function closeDialog() {
-    if (!dialogRef.current) return;
-    dialogRef.current.close();
+  function updateReferences(
+    argDialog: HTMLDialogElement,
+    argTrigger: HTMLElement
+  ) {
+    refs.setFloating(argDialog);
+    refs.setReference(argTrigger);
   }
+  const openDialog = useCallback(() => {
+    if (!dialog || !trigger) return;
+    dialog.showModal();
+    updateReferences(dialog, trigger);
+  }, [dialog, trigger]);
 
-  function positionFlyout() {
-    if (!flyout) return;
-    if (!triggerRef.current) return;
-    if (!dialogRef.current) return;
-    const {
-      top,
-      left,
-      height,
-      width: triggerWidth,
-    } = triggerRef.current.getBoundingClientRect();
-    const { width: dialogWidth } = dialogRef.current.getBoundingClientRect();
-    const t = top + height + 10;
-    let l = left + triggerWidth / 2 - dialogWidth / 2;
-    if (l < 0) l = 0;
-    const updatedStyles = {
-      top: t,
-      left: l,
-      margin: 0,
-    };
-    setStyles((oldStyles) => ({ ...oldStyles, ...updatedStyles }));
-  }
-  useEffect(() => {
-    triggerRef.current = trigger;
-  }, [trigger]);
+  const closeDialog = useCallback(() => {
+    if (!dialog) return;
+    dialog.close();
+  }, [dialog]);
 
   useEffect(() => {
-    dialogRef.current = dialog;
     isOpen && openDialog();
-    isOpen && flyout && positionFlyout();
-  }, [dialog, isOpen]);
+    setStyles({}); // force rerendering, hack!
+  }, [isOpen, openDialog]);
 
-  useEffect(() => {
-    window.addEventListener('resize', positionFlyout);
-    window.addEventListener('scroll', positionFlyout);
-
-    setStyles((oldStyles) => ({ ...oldStyles, ...style }));
-    isOpen && flyout && positionFlyout();
-    return () => {
-      window.removeEventListener('resize', positionFlyout);
-      window.removeEventListener('scroll', positionFlyout);
-    };
-  }, [isOpen, flyout]);
   return {
     openDialog,
     closeDialog,
-    styles,
+    styles: flyout ? { ...style, ...floatingStyles } : style,
   };
 }

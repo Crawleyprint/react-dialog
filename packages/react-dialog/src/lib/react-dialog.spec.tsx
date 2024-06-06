@@ -22,7 +22,7 @@ describe('Dialog', () => {
       expect(baseElement).toBeInTheDocument();
       expect(baseElement.getElementsByTagName('p').length).toEqual(2);
     });
-    it('should not have the correct visibility for each of the elements', () => {
+    it('should have the correct visibility for each of the elements', () => {
       const { baseElement } = render(
         <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
           <p>Child node 1</p>
