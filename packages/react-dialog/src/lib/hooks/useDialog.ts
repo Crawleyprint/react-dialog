@@ -15,7 +15,6 @@ export function useDialog({
   flyout = undefined,
   isOpen = false,
 }: useDialogArgumentsType) {
-  const [openStatus, setOpenStatus] = useState<boolean>(isOpen);
   const dialogRef = useRef<HTMLDialogElement | null>(dialog);
   const triggerRef = useRef<HTMLElement | null>(trigger);
   const [styles, setStyles] = useState<Record<string, unknown>>({
@@ -69,12 +68,12 @@ export function useDialog({
     window.addEventListener('scroll', positionFlyout);
 
     setStyles((oldStyles) => ({ ...oldStyles, ...style }));
-    openStatus && flyout && positionFlyout();
+    isOpen && flyout && positionFlyout();
     return () => {
       window.removeEventListener('resize', positionFlyout);
       window.removeEventListener('scroll', positionFlyout);
     };
-  }, [openStatus, flyout]);
+  }, [isOpen, flyout]);
   return {
     openDialog,
     closeDialog,
