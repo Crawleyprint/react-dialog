@@ -3,6 +3,7 @@
   "version": "1.0.2-0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "LICENSE.md",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
