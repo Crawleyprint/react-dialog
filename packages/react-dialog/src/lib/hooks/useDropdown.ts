@@ -25,6 +25,20 @@ export function useDropdown({
       return cleanup;
     }
   }, [open, elements, update]);
+
+  useEffect(() => {
+    function closeOnClickOutside(event: MouseEvent) {
+      const target = event.target as Element;
+      if (open && !target.closest(`.dropdown--open`)) closeDialog();
+    }
+    if (open) {
+      window.addEventListener('click', closeOnClickOutside);
+    }
+    return () => {
+      window.removeEventListener('click', closeOnClickOutside);
+    };
+  }, [open]);
+
   return {
     openDialog,
     closeDialog,

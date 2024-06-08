@@ -96,7 +96,7 @@ describe('Dropdown', () => {
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
       const trigger = screen.getByTestId('dropdown-trigger');
       await user.click(trigger);
-      expect(baseElement.querySelector('dialog')).toBeVisible();
+      expect(screen.getByTestId('dropdown-body')).toBeVisible();
       await user.keyboard('{Escape}');
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
       await user.click(trigger);

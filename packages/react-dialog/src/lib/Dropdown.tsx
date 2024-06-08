@@ -7,9 +7,9 @@ import {
   MiddlewareData,
 } from '@floating-ui/react-dom';
 import { useDropdown } from './hooks/useDropdown';
+import css from './react-dialog.module.css';
 
 function getArrowStyles(middlewareData: MiddlewareData): CSSProperties {
-  console.log(middlewareData);
   const arrowPlacementProperty = {
     bottom: 'top',
     left: 'right',
@@ -24,7 +24,7 @@ function getArrowStyles(middlewareData: MiddlewareData): CSSProperties {
     display: 'block',
     position: 'absolute',
     left: middlewareData.arrow?.x,
-    top: middlewareData.arrow?.y || 0,
+    top: middlewareData.arrow?.y,
   };
 }
 
@@ -38,7 +38,7 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const arrowRef = useRef<HTMLSpanElement>(null);
-  const { openDialog, closeDialog, floatingStyles, middlewareData } =
+  const { openDialog, closeDialog, floatingStyles, middlewareData, open } =
     useDropdown({
       dialog: dialogRef.current,
       anchor: buttonRef.current,
@@ -53,9 +53,10 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
     onClose?.();
   }
   return (
-    <>
+    <div className={`${open ? 'dropdown--open' : ''}`}>
       <button
         ref={buttonRef}
+        tabIndex={0}
         data-testid="dropdown-trigger"
         onClick={openDialog}
         style={{ width: 80 }}
@@ -64,9 +65,10 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
       </button>
       <dialog
         data-testid="dropdown-body"
+        className={`${css.dropdown}`}
         ref={dialogRef}
         style={{
-          padding: 10,
+          paddingTop: 10,
           background: 'transparent',
           border: 0,
           margin: 0,
@@ -81,11 +83,15 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
         <div className="dropdown-content" style={{ background: 'white' }}>
           {children}
           <div>{JSON.stringify(middlewareData, null, 2)}</div>
-          <button data-testid="dropdown-close" onClick={closeDropdown}>
+          <button
+            tabIndex={0}
+            data-testid="dropdown-close"
+            onClick={closeDropdown}
+          >
             Close
           </button>
         </div>
       </dialog>
-    </>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, act } from '@testing-library/react';
 import { useDialog } from './useDialog';
 describe('useDialog() hook', () => {
   it('should return no styles if dialog and trigger are not provided', () => {
@@ -11,9 +11,11 @@ describe('useDialog() hook', () => {
   });
   it('should update its open status', () => {
     const { result } = renderHook(useDialog, {
-      initialProps: { dialog: null, isOpen: true },
+      initialProps: { dialog: null, isOpen: false },
     });
-    result.current.openDialog();
+    act(() => {
+      result.current.openDialog();
+    });
     expect(result.current.open).toEqual(true);
   });
 });

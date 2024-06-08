@@ -1,47 +1,4 @@
-.dialog {
-  box-sizing: border-box;
-  opacity: 0;
-  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
-    display 0.5s ease allow-discrete;
-  background-color: var(--default-prominent);
-  border: 0;
-  border-radius: 8px;
-  overflow: visible;
-}
-.dialog[open]::backdrop {
-  opacity: 0.8;
-}
-.flyout-dialog[open]::backdrop {
+.dropdown[open]::backdrop {
   display: none;
-}
-.flyout-dialog {
-  position: fixed;
-  margin: 0 !important;
-}
-.dialog::backdrop {
-  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
-    display 0.5s ease allow-discrete;
-  background-image: linear-gradient(
-    45deg,
-    var(--default-prominent),
-    var(--accent-dark)
-  );
-  opacity: 0;
-}
-@starting-style {
-  .dialog {
-    opacity: 1;
-  }
-  .dialog[open] {
-    opacity: 0;
-  }
-}
-
-.arrow {
-  position: absolute;
-  background-color: red;
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  top: -10px;
+  pointer-events: none;
 }
