@@ -1,30 +1,55 @@
-import { CSSProperties, FC, useRef } from 'react';
+import { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import {
   shift,
   offset,
   flip,
   arrow,
   MiddlewareData,
+  Placement,
 } from '@floating-ui/react-dom';
 import { useDropdown } from './hooks/useDropdown';
 import css from './react-dialog.module.css';
 
-function getArrowStyles(middlewareData: MiddlewareData): CSSProperties {
-  const arrowPlacementProperty = {
+const defaultStyles = {
+  background: 'white',
+  borderColor: 'black',
+  offset: 10,
+};
+
+function getPlacementPrefix(placement: Placement) {
+  if (!placement) return 'top';
+  const offsetProperty: Record<string, string> = {
     bottom: 'top',
     left: 'right',
     right: 'left',
     top: 'bottom',
   };
-  const placement = middlewareData.offset?.placement || 'top';
+
+  return offsetProperty[placement];
+}
+
+function getArrowStyles(middlewareData: MiddlewareData): CSSProperties {
+  let arrowRotateAngles;
+  switch (middlewareData.offset?.placement) {
+    case 'top':
+      arrowRotateAngles = 180;
+      break;
+    case 'right':
+      arrowRotateAngles = -90;
+      break;
+    case 'left':
+      arrowRotateAngles = 90;
+      break;
+    default:
+      arrowRotateAngles = 0;
+  }
   return {
-    width: 10,
-    height: 10,
     background: 'white',
     display: 'block',
     position: 'absolute',
-    left: middlewareData.arrow?.x,
-    top: middlewareData.arrow?.y,
+    insetInlineStart: middlewareData.arrow?.x,
+    insetBlockStart: middlewareData.arrow?.y,
+    transform: `rotate(${arrowRotateAngles}deg)`,
   };
 }
 
@@ -34,10 +59,14 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
   isOpen = false,
   style = {},
   onClose = () => {},
+  placement = 'bottom',
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const arrowRef = useRef<HTMLSpanElement>(null);
+  const arrowRef = useRef<SVGSVGElement>(null);
+  const [paddingOffsetPrefix, setPaddingOffsetPrefix] =
+    useState<string>('paddingTop');
+  const [offsetPrefix, setOffsetPrefix] = useState('top');
   const { openDialog, closeDialog, floatingStyles, middlewareData, open } =
     useDropdown({
       dialog: dialogRef.current,
@@ -45,13 +74,20 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
       isOpen,
       floating: {
         middleware: [shift(), offset(), flip(), arrow({ element: arrowRef })],
-        placement: 'bottom',
+        placement,
       },
     });
   function closeDropdown() {
     closeDialog();
     onClose?.();
   }
+  useEffect(() => {
+    const prefix = getPlacementPrefix(middlewareData.offset?.placement);
+    setOffsetPrefix(prefix);
+    setPaddingOffsetPrefix(
+      `padding${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`
+    );
+  }, [middlewareData.offset?.placement]);
   return (
     <div className={`${open ? 'dropdown--open' : ''}`}>
       <button
@@ -59,30 +95,43 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
         tabIndex={0}
         data-testid="dropdown-trigger"
         onClick={openDialog}
-        style={{ width: 80 }}
       >
         {targetLabel}
       </button>
       <dialog
-        data-testid="dropdown-body"
         className={`${css.dropdown}`}
         ref={dialogRef}
         style={{
-          paddingTop: 10,
           background: 'transparent',
           border: 0,
           margin: 0,
-          ...style,
           ...floatingStyles,
+          [paddingOffsetPrefix]: defaultStyles.offset,
         }}
       >
-        <span
+        <svg
           ref={arrowRef}
-          style={{ ...getArrowStyles(middlewareData) }}
-        ></span>
-        <div className="dropdown-content" style={{ background: 'white' }}>
+          data-testid="dropdown-arrow"
+          style={{
+            ...getArrowStyles(middlewareData),
+            [offsetPrefix]: 2,
+            backgroundColor: 'transparent',
+          }}
+          width={defaultStyles.offset}
+          height={defaultStyles.offset}
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <polygon fill={defaultStyles.background} points="50,15 90,85 10,85" />
+        </svg>
+        <div
+          data-testid="dropdown-body"
+          className={css['dropdown__body']}
+          style={{
+            ...style,
+          }}
+        >
           {children}
-          <div>{JSON.stringify(middlewareData, null, 2)}</div>
           <button
             tabIndex={0}
             data-testid="dropdown-close"
