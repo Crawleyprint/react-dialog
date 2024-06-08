@@ -9,10 +9,10 @@ export function useDropdown({
   floating,
 }: Crawleyprint.IUseDropdown): Crawleyprint.IUseDropdownReturn {
   const { openDialog, closeDialog, open } = useDialog({ dialog, isOpen });
-  const { refs, floatingStyles, elements, update } = useFloating({
-    middleware: floating.middleware,
-    placement: floating.placement,
-  });
+  const { refs, floatingStyles, elements, update, middlewareData } =
+    useFloating({
+      ...floating,
+    });
 
   useEffect(() => {
     refs.setReference(anchor);
@@ -30,5 +30,6 @@ export function useDropdown({
     closeDialog,
     open,
     floatingStyles,
+    middlewareData,
   };
 }

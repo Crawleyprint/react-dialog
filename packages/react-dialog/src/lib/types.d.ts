@@ -1,4 +1,4 @@
-import { Middleware, Placement } from '@floating-ui/react-dom';
+import { Middleware, MiddlewareData, Placement } from '@floating-ui/react-dom';
 
 namespace Crawleyprint {
   interface IUseDialog {
@@ -35,5 +35,6 @@ namespace Crawleyprint {
   }
   interface IUseDropdownReturn extends IUseDialogReturn {
     floatingStyles: CSSProperties;
+    middlewareData: MiddlewareData;
   }
 }
