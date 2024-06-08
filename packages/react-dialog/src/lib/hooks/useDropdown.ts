@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useDialog } from './useDialog';
 import { useFloating, autoUpdate } from '@floating-ui/react-dom';
+import type { IUseDropdown, IUseDropdownReturn } from '../types';
 
 export function useDropdown({
   dialog,
   anchor,
   isOpen,
   floating,
-}: Crawleyprint.IUseDropdown): Crawleyprint.IUseDropdownReturn {
+}: IUseDropdown): IUseDropdownReturn {
   const { openDialog, closeDialog, open } = useDialog({ dialog, isOpen });
   const { refs, floatingStyles, elements, update, middlewareData } =
     useFloating({

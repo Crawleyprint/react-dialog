@@ -3,10 +3,11 @@ import type { FC } from 'react';
 
 import css from './react-dialog.module.css';
 import { useDialog } from './hooks/useDialog';
+import { type DialogProps } from './types';
 
 const defaultStyle = {};
 
-export const Dialog: FC<Crawleyprint.DialogProps> = ({
+export const Dialog: FC<DialogProps> = ({
   targetLabel,
   closeBtnLabel = 'Close',
   children,

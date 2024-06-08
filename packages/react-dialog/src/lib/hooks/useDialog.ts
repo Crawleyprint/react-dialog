@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import type { IUseDialog, IUseDialogReturn } from '../types';
 
 export function useDialog({
   dialog,
   isOpen = false,
-}: Crawleyprint.IUseDialog): Crawleyprint.IUseDialogReturn {
+}: IUseDialog): IUseDialogReturn {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [open, setOpen] = useState<boolean | null>(null);
 

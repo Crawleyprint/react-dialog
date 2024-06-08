@@ -8,6 +8,7 @@ import {
   Placement,
 } from '@floating-ui/react-dom';
 import { useDropdown } from './hooks/useDropdown';
+import type { DropdownProps } from './types';
 import css from './react-dialog.module.css';
 
 const defaultStyles = {
@@ -53,7 +54,7 @@ function getArrowStyles(middlewareData: MiddlewareData): CSSProperties {
   };
 }
 
-export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
+export const Dropdown: FC<DropdownProps> = ({
   children,
   targetLabel,
   isOpen = false,
@@ -82,7 +83,9 @@ export const Dropdown: FC<Crawleyprint.DropdownProps> = ({
     onClose?.();
   }
   useEffect(() => {
-    const prefix = getPlacementPrefix(middlewareData.offset?.placement);
+    const prefix = getPlacementPrefix(
+      middlewareData.offset?.placement || 'bottom'
+    );
     setOffsetPrefix(prefix);
     setPaddingOffsetPrefix(
       `padding${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`
