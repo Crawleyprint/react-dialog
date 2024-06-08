@@ -27,7 +27,7 @@ export interface IFloatingUI {
 }
 
 export interface DropdownProps extends DialogProps {
-  placement: Placement;
+  placement?: Placement;
 }
 
 export interface IUseDropdown extends IUseDialog {
