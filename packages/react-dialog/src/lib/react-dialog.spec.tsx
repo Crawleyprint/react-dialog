@@ -79,7 +79,6 @@ describe('Dialog', () => {
           <p>Child node 2</p>
         </Dialog>
       );
-      const trigger = screen.getByTestId('dialog-trigger');
       await user.keyboard('Escape');
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
     });
