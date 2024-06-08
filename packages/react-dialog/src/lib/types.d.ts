@@ -1,3 +1,5 @@
+import { Middleware, Placement } from '@floating-ui/react-dom';
+
 namespace Crawleyprint {
   interface IUseDialog {
     dialog: HTMLDialogElement | null;
@@ -20,8 +22,18 @@ namespace Crawleyprint {
     onClose?: () => void;
   }
 
+  interface IFloatingUI {
+    middleware?: Middleware[];
+    placement?: Placement;
+  }
+
   interface DropdownProps extends DialogProps {}
 
-  interface IUseDropdown extends IUseDialog {}
-  interface IUseDropdownReturn extends IUseDialogReturn {}
+  interface IUseDropdown extends IUseDialog {
+    anchor: HTMLElement | null;
+    floating?: IFloatingUI;
+  }
+  interface IUseDropdownReturn extends IUseDialogReturn {
+    floatingStyles: CSSProperties;
+  }
 }

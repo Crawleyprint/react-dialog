@@ -79,8 +79,28 @@ describe('Dropdown', () => {
           <p>Child node 2</p>
         </Dropdown>
       );
-      await user.keyboard('Escape');
+      const trigger = screen.getByTestId('dropdown-trigger');
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
+      await user.keyboard('[Escape]');
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
+    });
+    it('should be able to open again after closing with Esc', async () => {
+      const user = userEvent.setup();
+      const { baseElement } = render(
+        <Dropdown targetLabel="Dropdown" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dropdown>
+      );
+      expect(baseElement.querySelector('dialog')).not.toBeVisible();
+      const trigger = screen.getByTestId('dropdown-trigger');
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
+      await user.keyboard('{Escape}');
+      expect(baseElement.querySelector('dialog')).not.toBeVisible();
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
     });
     it('should close dropdown on close button click', async () => {
       const user = userEvent.setup();

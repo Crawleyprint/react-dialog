@@ -7,14 +7,14 @@ describe('Dialog', () => {
   describe('Basic functionality', () => {
     it('should render base element, trigger and close button', () => {
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close" />
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close" />
       );
       expect(baseElement).toBeInTheDocument();
-      expect(screen.getByText('Dropdown')).toBeInTheDocument();
+      expect(screen.getByText('Dialog')).toBeInTheDocument();
     });
     it('should render children elements correctly', () => {
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -24,7 +24,7 @@ describe('Dialog', () => {
     });
     it('should have the correct visibility for each of the elements', () => {
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -36,7 +36,7 @@ describe('Dialog', () => {
     });
     it('should be visible if "open" attribute was provided', () => {
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" isOpen closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" isOpen closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -49,7 +49,7 @@ describe('Dialog', () => {
     it('should be able to close initially open dialog', async () => {
       const user = userEvent.setup();
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" isOpen closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" isOpen closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -62,7 +62,7 @@ describe('Dialog', () => {
     it('should display dialog on trigger click', async () => {
       const user = userEvent.setup();
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -74,18 +74,37 @@ describe('Dialog', () => {
     it('should close on Esc', async () => {
       const user = userEvent.setup();
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
       );
-      await user.keyboard('Escape');
+      const trigger = screen.getByTestId('dialog-trigger');
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
+      await user.keyboard('[Escape]');
       expect(baseElement.querySelector('dialog')).not.toBeVisible();
+    });
+    it('should open again after closing with Esc', async () => {
+      const user = userEvent.setup();
+      const { baseElement } = render(
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close">
+          <p>Child node 1</p>
+          <p>Child node 2</p>
+        </Dialog>
+      );
+      const trigger = screen.getByTestId('dialog-trigger');
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
+      await user.keyboard('[Escape]');
+      expect(baseElement.querySelector('dialog')).not.toBeVisible();
+      await user.click(trigger);
+      expect(baseElement.querySelector('dialog')).toBeVisible();
     });
     it('should close dialog on close button click', async () => {
       const user = userEvent.setup();
       const { baseElement } = render(
-        <Dialog targetLabel="Dropdown" closeBtnLabel="Close">
+        <Dialog targetLabel="Dialog" closeBtnLabel="Close">
           <p>Child node 1</p>
           <p>Child node 2</p>
         </Dialog>
@@ -102,7 +121,7 @@ describe('Dialog', () => {
     it('should accept and respect width and height property', () => {
       render(
         <Dialog
-          targetLabel="Dropdown"
+          targetLabel="Dialog"
           closeBtnLabel="Close"
           style={{
             width: '300px',

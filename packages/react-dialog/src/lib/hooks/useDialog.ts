@@ -29,6 +29,17 @@ export function useDialog({
     }
   }, [dialog, open]);
 
+  useEffect(() => {
+    const handleCloseDialogOnEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeDialog();
+    };
+    window.addEventListener('keydown', handleCloseDialogOnEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleCloseDialogOnEsc);
+    };
+  });
+
   return {
     openDialog,
     closeDialog,
