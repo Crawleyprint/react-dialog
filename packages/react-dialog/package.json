@@ -2,6 +2,7 @@
   "name": "@crawleyprint/react-dialog",
   "version": "1.0.0-0",
   "main": "./dist/index.js",
+  "private": false,
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {

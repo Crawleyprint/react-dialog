@@ -42,5 +42,12 @@
         "unitTestRunner": "vitest"
       }
     }
+  },
+  "release": {
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
   }
 }
