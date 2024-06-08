@@ -25,5 +25,25 @@ returns:
 interface IUseDialogReturn {
   openDialog: () => void;
   closeDialog: () => void;
+  open: boolean;
+}
+```
+
+Usage:
+
+```
+import { useRef } from 'react';
+import { useDialog } from '@crawleyprint/react-dialog';
+
+export function Dialog() {
+    const dialogRef = useRef<HTMLDialogElement>(null);
+    const { openDialog, closeDialog } = useDialog();
+    return <>
+        <button onClick={openDialog}>
+        <dialog>
+            <p>Dialog contents</p>
+            <button onClick={closeDialog}>Close</button>
+        </dialog>
+    </>
 }
 ```
