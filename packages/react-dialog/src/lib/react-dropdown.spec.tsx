@@ -139,3 +139,16 @@ describe('Dropdown', () => {
     });
   });
 });
+
+describe('Dropdown arrow', () => {
+  it('should be present and visible when dropdown is open', async () => {
+    const user = userEvent.setup();
+    render(<Dropdown targetLabel="Dropdown" open closeBtnLabel="Close" />);
+    const arrow = screen.getByTestId('dropdown-arrow');
+    const trigger = screen.getByTestId('dropdown-trigger');
+
+    await user.click(trigger);
+
+    expect(arrow).toBeVisible();
+  });
+});
