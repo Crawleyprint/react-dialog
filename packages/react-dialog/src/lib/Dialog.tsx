@@ -4,16 +4,6 @@ import type { FC, ReactNode, CSSProperties } from 'react';
 import css from './react-dialog.module.css';
 import { useDialog } from './hooks/useDialog';
 
-type DialogProps = {
-  targetLabel: string;
-  closeBtnLabel?: string;
-  placement?: 'up' | 'down' | 'left' | 'right';
-  onClose?: () => void;
-  children?: ReactNode;
-  isOpen?: boolean;
-  style?: CSSProperties;
-};
-
 const defaultStyle = {};
 
 export const Dialog: FC<DialogProps> = ({
@@ -26,12 +16,10 @@ export const Dialog: FC<DialogProps> = ({
   style = defaultStyle,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
   const arrowEl = useRef<HTMLElement>(null);
 
   const { openDialog, closeDialog } = useDialog({
     dialog: dialogRef.current,
-    trigger: triggerRef.current,
     style,
     isOpen,
   });
@@ -48,7 +36,6 @@ export const Dialog: FC<DialogProps> = ({
     <div>
       <button
         data-testid="dialog-trigger"
-        ref={triggerRef}
         type="button"
         onClick={showDialog}
         className={`btn dialog-open}`}
