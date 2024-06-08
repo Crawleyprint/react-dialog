@@ -1,23 +1,19 @@
 import { renderHook } from '@testing-library/react';
 import { useDialog } from './useDialog';
-describe.skip('useDialog() hook', () => {
+describe('useDialog() hook', () => {
   it('should return no styles if dialog and trigger are not provided', () => {
     const { result } = renderHook(useDialog, {
-      initialProps: { dialog: null, trigger: null },
+      initialProps: { dialog: null },
     });
-    expect(result.current.styles).toEqual({});
+    expect(result.current.openDialog).toBeTypeOf('function');
+    expect(result.current.closeDialog).toBeTypeOf('function');
+    expect(result.current.open).toEqual(false);
   });
-  it('should return css style when in flyout mode', () => {
-    const trigger = document.createElement('button');
-    const dialog = document.createElement('dialog');
+  it('should update its open status', () => {
     const { result } = renderHook(useDialog, {
-      initialProps: { dialog, trigger, placement: 'down', isOpen: true },
+      initialProps: { dialog: null, isOpen: true },
     });
-    expect(Object.keys(result.current.styles).sort()).toEqual([
-      'left',
-      'position',
-      'top',
-      'transform',
-    ]);
+    result.current.openDialog();
+    expect(result.current.open).toEqual(true);
   });
 });

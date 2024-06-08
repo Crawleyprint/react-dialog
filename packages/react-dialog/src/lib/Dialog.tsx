@@ -29,13 +29,11 @@ export const Dialog: FC<DialogProps> = ({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const arrowEl = useRef<HTMLElement>(null);
 
-  const { openDialog, closeDialog, styles, arrowStyles } = useDialog({
+  const { openDialog, closeDialog } = useDialog({
     dialog: dialogRef.current,
     trigger: triggerRef.current,
     style,
-    placement,
     isOpen,
-    arrowEl: arrowEl.current,
   });
 
   function showDialog() {
@@ -59,18 +57,12 @@ export const Dialog: FC<DialogProps> = ({
         {targetLabel}
       </button>
       <dialog
+        style={{ ...style }}
         data-testid="dialog-body"
         ref={dialogRef}
         className={`${css.dialog} ${placement ? css['flyout-dialog'] : ''}`}
-        style={{ ...styles }}
       >
-        {placement && (
-          <span
-            className={css.arrow}
-            ref={arrowEl}
-            style={{ ...arrowStyles }}
-          ></span>
-        )}
+        {placement && <span className={css.arrow} ref={arrowEl}></span>}
         {children}
         <button
           tabIndex={0}
