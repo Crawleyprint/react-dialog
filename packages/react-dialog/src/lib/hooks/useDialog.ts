@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 export function useDialog({
   dialog,
   isOpen = false,
-}: IUseDialog): IUseDialogReturn {
+}: Crawleyprint.IUseDialog): Crawleyprint.IUseDialogReturn {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [open, setOpen] = useState<boolean | null>(null);
 

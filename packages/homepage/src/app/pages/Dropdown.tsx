@@ -1,13 +1,9 @@
-import { Dialog } from '@crawleyprint/react-dialog';
+import { Dropdown } from '@crawleyprint/react-dialog';
 
 export default function DropdownPage() {
   return (
     <>
-      <Dialog
-        targetLabel="Open dropdown"
-        placement="down"
-        style={{ width: 400 }}
-      >
+      <Dropdown targetLabel="Open dropdown" style={{ width: 400 }}>
         <h1>Dropdown</h1>
         <main>
           <p>
@@ -16,7 +12,7 @@ export default function DropdownPage() {
             <kbd>Esc</kbd>
           </p>
           <ul>
-            {Array.from(new Array(5), (_, index) => (
+            {Array.from(new Array(5).fill(1), (_, index) => (
               <li key={Math.random()}>
                 <label>
                   <input
@@ -31,7 +27,7 @@ export default function DropdownPage() {
             ))}
           </ul>
         </main>
-      </Dialog>
+      </Dropdown>
 
       <div>
         <p>

@@ -1,22 +1,20 @@
 import { useRef } from 'react';
-import type { FC, ReactNode, CSSProperties } from 'react';
+import type { FC } from 'react';
 
 import css from './react-dialog.module.css';
 import { useDialog } from './hooks/useDialog';
 
 const defaultStyle = {};
 
-export const Dialog: FC<DialogProps> = ({
+export const Dialog: FC<Crawleyprint.DialogProps> = ({
   targetLabel,
   closeBtnLabel = 'Close',
   children,
   onClose = () => {},
   isOpen = false,
-  placement = undefined,
   style = defaultStyle,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const arrowEl = useRef<HTMLElement>(null);
 
   const { openDialog, closeDialog } = useDialog({
     dialog: dialogRef.current,
@@ -33,7 +31,7 @@ export const Dialog: FC<DialogProps> = ({
     closeDialog();
   }
   return (
-    <div>
+    <>
       <button
         data-testid="dialog-trigger"
         type="button"
@@ -47,9 +45,8 @@ export const Dialog: FC<DialogProps> = ({
         style={{ ...style }}
         data-testid="dialog-body"
         ref={dialogRef}
-        className={`${css.dialog} ${placement ? css['flyout-dialog'] : ''}`}
+        className={`${css.dialog}`}
       >
-        {placement && <span className={css.arrow} ref={arrowEl}></span>}
         {children}
         <button
           tabIndex={0}
@@ -60,6 +57,6 @@ export const Dialog: FC<DialogProps> = ({
           {closeBtnLabel}
         </button>
       </dialog>
-    </div>
+    </>
   );
 };
