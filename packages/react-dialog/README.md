@@ -3,6 +3,12 @@
 This library is, first and foremost, a collection of react hooks which aim to simplify
 creation of your own dialogs.
 
+## Installation
+
+```
+npm install @crawleyprint/react-dialog --save
+```
+
 ## Running unit tests
 
 Run `nx test react-dialog` to execute the unit tests via [Vitest](https://vitest.dev/).
@@ -29,21 +35,30 @@ interface IUseDialogReturn {
 }
 ```
 
-Usage:
+Example dialog component:
 
 ```
 import { useRef } from 'react';
 import { useDialog } from '@crawleyprint/react-dialog';
 
-export function Dialog() {
-    const dialogRef = useRef<HTMLDialogElement>(null);
-    const { openDialog, closeDialog } = useDialog();
+export function Dialog({buttonTitle, children}) {
+    const dialogRef = useRef(null);
+    const { openDialog, closeDialog } = useDialog({
+      dialog: dialogRef.current,
+      style,
+      isOpen,
+    });
+    // implement your custom logic, maybe
+    // wrap openDialog and closeDialog in your own functions
+    // to add more functionality
     return <>
-        <button onClick={openDialog}>
+        <button onClick={openDialog}>{buttonTitle}</button>
         <dialog>
-            <p>Dialog contents</p>
+            <p>{children}</p>
             <button onClick={closeDialog}>Close</button>
         </dialog>
     </>
 }
 ```
+
+### Coming soon: Dropdown using hooks and better docs
