@@ -61,7 +61,55 @@ export function Dialog({buttonTitle, children}) {
 }
 ```
 
-### Coming soon: Dropdown using hooks and better docs
+### Create Dropdown component using hooks
+
+```
+import { useRef } from 'react';
+import { useDropdown } from '@crawleyprint/react-dialog'; // Make sure the path is correct
+
+const DropdownWithHooks = ({children, buttonTitle}) => {
+  const dialogRef = useRef(null);
+  const anchorRef = useRef(null);
+
+  const { open, openDialog, closeDialog, floatingStyles } = useDropdown({
+    dialog: dialogRef.current,
+    anchor: anchorRef.current,
+    floating: { placement: 'bottom', middleware: [] },
+  });
+
+  return (
+    <div className={`${open ? ' dropdown--open' : ''}`}>
+      <button tabIndex={0} ref={anchorRef} onClick={openDialog}>
+        {buttonTitle}
+      </button>
+      <dialog
+        ref={dialogRef}
+        className="dropdown"
+        style={{
+          margin: 0,
+          ...floatingStyles,
+        }}
+      >
+        {children}
+        <button tabIndex={0} onClick={closeDialog}>
+          Close dropdown
+        </button>
+      </dialog>
+    </div>
+  );
+};
+
+export default DropdownWithHooks;
+```
+
+Additionally, to hide your dropdown's backdrop, you'll need to add styles `.dropdown`
+(or whatever you want to name CSS class for the dropdown, just make sure names are matching in JSX and CSS):
+
+```
+.dropdown::backdrop {
+  display: none;
+}
+```
 
 ## Running unit tests
 
