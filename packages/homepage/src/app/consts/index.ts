@@ -10,4 +10,5 @@ export const navRoutes = [
   { url: '/embed-elements', title: 'Embed anything' },
   { url: '/open-by-default', title: 'Open by default' },
   { url: '/hooks', title: 'Standalone hooks' },
+  { url: '/dropdown-with-hooks', title: 'Dropdown with hooks' },
 ];

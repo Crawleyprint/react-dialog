@@ -22,7 +22,6 @@ export function useDialog({
 
   useEffect(() => {
     dialogRef.current = dialog;
-
     if (open) {
       dialogRef.current?.showModal();
     } else {
