@@ -30,7 +30,7 @@ function getPlacementPrefix(placement: Placement) {
 }
 
 function getArrowStyles(middlewareData: MiddlewareData): CSSProperties {
-  let arrowRotateAngles;
+  let arrowRotateAngles: number;
   switch (middlewareData.offset?.placement) {
     case 'top':
       arrowRotateAngles = 180;
