@@ -1,5 +1,9 @@
 .dropdown {
   padding: 0;
+
+  polygon {
+    fill: white;
+  }
 }
 .dropdown[open]::backdrop {
   display: none;
