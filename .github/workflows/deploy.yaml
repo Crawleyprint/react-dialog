@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Test the library
+        run: yarn nx test react-dialog
+
       - name: Build the library
         run: yarn nx build react-dialog
 
