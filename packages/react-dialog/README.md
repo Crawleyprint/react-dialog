@@ -3,15 +3,15 @@
 This library is, first and foremost, a collection of react hooks which aim to simplify
 creation of your own dialogs.
 
+## Examples
+
+[Live Demo](http://crawleyprint.github.io/react-dialog/)
+
 ## Installation
 
 ```
-npm install @crawleyprint/react-dialog --save
+npm install @crawleyprint/react-dialog @floating-ui/react-dom --save
 ```
-
-## Running unit tests
-
-Run `nx test react-dialog` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 ## useDialog hook
 
@@ -62,3 +62,7 @@ export function Dialog({buttonTitle, children}) {
 ```
 
 ### Coming soon: Dropdown using hooks and better docs
+
+## Running unit tests
+
+Run `nx test react-dialog` to execute the unit tests via [Vitest](https://vitest.dev/).
