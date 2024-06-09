@@ -2,6 +2,7 @@
   "name": "react-dialog-project",
   "version": "0.0.0",
   "license": "MIT",
+  "repository": "https://github.com/Crawleyprint/react-dialog",
   "devDependencies": {
     "@floating-ui/react-dom": "^2.1.0",
     "@nx/devkit": "19.1.2",
