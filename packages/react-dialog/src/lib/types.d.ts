@@ -9,6 +9,7 @@ export interface IUseDialog {
   dialog: HTMLDialogElement | null;
   style?: CSSProperties;
   isOpen?: boolean;
+  type?: 'dialog' | 'dropdown';
 }
 
 export interface IUseDialogReturn {

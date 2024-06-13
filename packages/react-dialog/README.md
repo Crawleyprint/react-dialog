@@ -78,7 +78,7 @@ const DropdownWithHooks = ({children, buttonTitle}) => {
   });
 
   return (
-    <div className={`${open ? ' dropdown--open' : ''}`}>
+    <div>
       <button tabIndex={0} ref={anchorRef} onClick={openDialog}>
         {buttonTitle}
       </button>
@@ -102,12 +102,13 @@ const DropdownWithHooks = ({children, buttonTitle}) => {
 export default DropdownWithHooks;
 ```
 
-Additionally, to hide your dropdown's backdrop, you'll need to add styles `.dropdown`
-(or whatever you want to name CSS class for the dropdown, just make sure names are matching in JSX and CSS):
+Additionally, bump the z-index up to your preference, so your dropdowns are visible over everything else in DOM.
+You can do this by adding the following CSS to `.dropdown` (or whatever you want to name CSS class for the dropdown,
+just make sure names are matching in JSX and CSS):
 
 ```
-.dropdown::backdrop {
-  display: none;
+.dropdown {
+  z-index: 1000;
 }
 ```
 

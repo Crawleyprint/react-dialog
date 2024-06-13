@@ -1,13 +1,10 @@
 .dropdown {
   padding: 0;
+  z-index: 1000;
 
   polygon {
     fill: white;
   }
-}
-.dropdown[open]::backdrop {
-  display: none;
-  pointer-events: none;
 }
 
 .dropdown__body {

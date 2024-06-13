@@ -30,17 +30,24 @@ export const Dropdown: FC<DropdownProps> = ({
         placement,
       },
     });
+  function toggleDropdown() {
+    if (open) {
+      closeDropdown();
+    } else {
+      openDialog();
+    }
+  }
   function closeDropdown() {
     closeDialog();
     onClose?.();
   }
   return (
-    <div className={`${open ? 'dropdown--open' : ''}`}>
+    <div>
       <button
         ref={buttonRef}
         tabIndex={0}
         data-testid="dropdown-trigger"
-        onClick={openDialog}
+        onClick={toggleDropdown}
       >
         {targetLabel}
       </button>

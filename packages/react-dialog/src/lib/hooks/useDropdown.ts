@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDialog } from './useDialog';
 import { useFloating, autoUpdate } from '@floating-ui/react-dom';
 import type { IUseDropdown, IUseDropdownReturn } from '../types';
@@ -9,7 +9,11 @@ export function useDropdown({
   isOpen,
   floating,
 }: IUseDropdown): IUseDropdownReturn {
-  const { openDialog, closeDialog, open } = useDialog({ dialog, isOpen });
+  const { openDialog, closeDialog, open } = useDialog({
+    dialog,
+    isOpen,
+    type: 'dropdown',
+  });
   const { refs, floatingStyles, elements, update, middlewareData } =
     useFloating({
       ...floating,
@@ -27,11 +31,15 @@ export function useDropdown({
     }
   }, [open, elements, update]);
 
-  useEffect(() => {
-    function closeOnClickOutside(event: MouseEvent) {
+  const closeOnClickOutside = useCallback(
+    (event: MouseEvent) => {
       const target = event.target as Element;
-      if (open && !target.closest(`.dropdown--open`)) closeDialog();
-    }
+      if (open && !dialog?.contains(target) && target !== anchor) closeDialog();
+    },
+    [dialog, anchor, open, closeDialog]
+  );
+
+  useEffect(() => {
     if (open) {
       window.addEventListener('click', closeOnClickOutside);
     }

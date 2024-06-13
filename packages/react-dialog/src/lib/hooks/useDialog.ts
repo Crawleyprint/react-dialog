@@ -4,6 +4,7 @@ import type { IUseDialog, IUseDialogReturn } from '../types';
 export function useDialog({
   dialog,
   isOpen = false,
+  type = 'dialog',
 }: IUseDialog): IUseDialogReturn {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [open, setOpen] = useState<boolean | null>(null);
@@ -23,7 +24,11 @@ export function useDialog({
   useEffect(() => {
     dialogRef.current = dialog;
     if (open) {
-      dialogRef.current?.showModal();
+      if (type === 'dropdown') {
+        dialogRef.current?.show();
+      } else {
+        dialogRef.current?.showModal();
+      }
     } else {
       dialogRef.current?.close();
     }
