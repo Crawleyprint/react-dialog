@@ -176,7 +176,7 @@ describe('Dropdown interaction', () => {
           </select>
           <input type="text" tabIndex={-1} />
           <textarea name="" disabled></textarea>
-          <input data-testid="focused" tabIndex={0} type="text" />
+          <input data-testid="focused" type="text" />
         </Dropdown>
         <Dropdown targetLabel="Dropdown 2" closeBtnLabel="Close 2">
           <a>Test</a>
