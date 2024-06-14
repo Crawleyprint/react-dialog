@@ -13,19 +13,22 @@ export default function DropdownPage() {
               <kbd>Esc</kbd>
             </p>
             <ul>
-              {Array.from(new Array(5).fill(1), (_, index) => (
-                <li key={index}>
-                  <label>
-                    <input
-                      tabIndex={0}
-                      type="checkbox"
-                      name="checkbox"
-                      value={`Check ${index}`}
-                    />
-                    Checkbox 1
-                  </label>
-                </li>
-              ))}
+              {Array.from(new Array(5).fill(1), (_, index) => {
+                return (
+                  <li key={index}>
+                    <label>
+                      <input
+                        tabIndex={index === 1 ? -1 : 0}
+                        type="checkbox"
+                        name="checkbox"
+                        value={`Check ${index + 1}`}
+                        {...{ disabled: index === 0 }}
+                      />
+                      Checkbox {index + 1}
+                    </label>
+                  </li>
+                );
+              })}
             </ul>
           </main>
         </Dropdown>

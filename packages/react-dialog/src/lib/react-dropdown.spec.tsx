@@ -142,13 +142,56 @@ describe('Dropdown', () => {
 
 describe('Dropdown arrow', () => {
   it('should be present and visible when dropdown is open', async () => {
-    const user = userEvent.setup();
-    render(<Dropdown targetLabel="Dropdown" open closeBtnLabel="Close" />);
+    render(<Dropdown targetLabel="Dropdown" isOpen closeBtnLabel="Close" />);
     const arrow = screen.getByTestId('dropdown-arrow');
-    const trigger = screen.getByTestId('dropdown-trigger');
-
-    await user.click(trigger);
-
     expect(arrow).toBeVisible();
+  });
+});
+
+describe('Dropdown interaction', () => {
+  it('should close one when opening another', async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <Dropdown targetLabel="Dropdown 1" isOpen closeBtnLabel="Close 1" />
+        <Dropdown targetLabel="Dropdown 2" closeBtnLabel="Close 2" />
+      </>
+    );
+    const closeBtn1 = screen.getByText('Close 1');
+    const closeBtn2 = screen.getByText('Close 2');
+    expect(closeBtn1).toBeVisible();
+    expect(closeBtn2).not.toBeVisible();
+    await user.click(screen.getByText('Dropdown 2'));
+    expect(closeBtn2).toBeVisible();
+    expect(closeBtn1).not.toBeVisible();
+  });
+  it('should focus the first focusable element', async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <Dropdown targetLabel="Dropdown 1" closeBtnLabel="Close 1">
+          <input type="text" disabled />
+          <select disabled>
+            <option value=""></option>
+          </select>
+          <input type="text" tabIndex={-1} />
+          <textarea name="" disabled></textarea>
+          <input data-testid="focused" tabIndex={0} type="text" />
+        </Dropdown>
+        <Dropdown targetLabel="Dropdown 2" closeBtnLabel="Close 2">
+          <a>Test</a>
+          <a href="#test" data-testid="focused-anchor">
+            Focused
+          </a>
+        </Dropdown>
+      </>
+    );
+
+    const trigger1 = screen.getByText('Dropdown 1');
+    const trigger2 = screen.getByText('Dropdown 2');
+    await user.click(trigger1);
+    expect(screen.getByTestId('focused')).toHaveFocus();
+    await user.click(trigger2);
+    expect(screen.getByTestId('focused-anchor')).toHaveFocus();
   });
 });

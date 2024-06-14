@@ -12,6 +12,7 @@ export const Dropdown: FC<DropdownProps> = ({
   style = {},
   onClose = () => {},
   placement = 'bottom',
+  closeBtnLabel = 'Close',
   arrowDimensions = {
     width: 10,
     height: 10,
@@ -85,7 +86,7 @@ export const Dropdown: FC<DropdownProps> = ({
             data-testid="dropdown-close"
             onClick={closeDropdown}
           >
-            Close
+            {closeBtnLabel}
           </button>
         </div>
       </dialog>
