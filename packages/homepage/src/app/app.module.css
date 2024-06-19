@@ -1,84 +1,48 @@
-/* Your styles goes here. */
 .container {
-  width: 100dvw;
+  padding-block-start: 0;
   font-size: var(--base-font-size);
   width: 100%;
   display: grid;
-  color: var(--accent-dark);
+  grid-template-rows: max-content 1fr;
   grid-template-columns:
     [start] 1fr
     [content] minmax(300px, 600px)
     [right] 1fr;
 }
+
 .content {
   grid-column: content;
-  min-height: 100svh;
   display: flex;
+  text-align: justify;
   flex-direction: column;
+  padding-inline: 1rem;
+  padding-block: 2ch;
   gap: 2ch;
-}
 
-.isActive {
-  background-color: var(--accent-dark) !important;
-  color: white !important;
-}
-
-.isPending {
-  color: blue;
+  section:first-child p:first-child:first-letter {
+    --size: 3;
+    --offset: 3;
+    initial-letter: var(--size) var(--offset); /* doesn't work in Safari */
+    -webkit-initial-letter: var(--size) var(--offset); /* works in Safari */
+    margin-inline-end: 0.5ch;
+    font-weight: 800;
+  }
 }
 
 .navigation {
-  display: flex;
-  gap: 0.5ch;
-  border-bottom: 1px solid var(--accent-dark);
-  margin-inline: -1ch;
-  padding-inline: 1ch;
   a {
+    display: inline-block;
     padding: 0.5ch;
-    background: var(--default-prominent);
-    color: var(--accent-dark);
+    margin-block: 0.2ch;
+  }
+  .isActive {
+    outline: none;
+    background-color: var(--prominent-background);
+    color: var(--prominent-color);
     text-decoration: none;
-    border-radius: 3px 0px 3px;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }
 
-dialog {
-  box-sizing: border-box;
-  opacity: 0;
-  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
-    display 0.5s ease allow-discrete;
-  background-color: var(--default-prominent);
-  border: 0;
-  border-radius: 8px;
-}
-dialog[open]::backdrop {
-  opacity: 0.8;
-}
-
-dialog::backdrop {
-  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
-    display 0.5s ease allow-discrete;
-  background-image: linear-gradient(
-    45deg,
-    var(--default-prominent),
-    var(--accent-dark)
-  );
-  opacity: 0;
-}
-.dropdown::backdrop {
-  display: none !important;
-  background-color: transparent !important;
-}
-
-@starting-style {
-  dialog {
-    opacity: 1;
-  }
-  dialog[open] {
-    opacity: 0;
-  }
+.separator {
+  margin-inline: 0.5ch;
 }

@@ -1,26 +1,37 @@
 :root {
-  --default: #219ebc;
-  --default-prominent: #8ecae6;
-  --control: #ffb703;
-  --accent: #fb8500;
-  --accent-dark: #023047;
+  --site-background-color: #f1f7ed;
+  --site-text-color: #54494b;
+
+  --header-background-color: #b33951;
+  --header-color: #f1f7ed;
+
+  --prominent-background: #b33951;
+  --prominent-color: #f1f7ed;
+
+  --link-color: #b33951;
+
+  --dark-accent: #54494b;
+
   --base-font-size: 16px;
   --animation-duration: 0.5s;
 }
+
 * {
   box-sizing: border-box;
 }
 
 body {
+  background-color: var(--site-background-color);
+  color: var(--site-text-color);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: var(--default);
-  color: var(--accent-dark);
+  padding: 0;
+  margin: 0;
 }
-
 :focus {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--prominent-background);
   outline-offset: 2px;
+  z-index: 1000;
 }
 dialog[open] {
   opacity: 1;
@@ -28,10 +39,28 @@ dialog[open] {
     display 0.5s ease allow-discrete;
 }
 dialog {
+  background-color: var(--site-background-color);
+  border: 2px solid var(--dark-accent);
+  opacity: 0;
+  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
+    display 0.5s ease allow-discrete;
+  max-width: calc(100dvw - 2ch);
+  &[class*='dropdown'] > div {
+    max-width: min(calc(100dvw - 2ch), 350px);
+    border: 2px solid var(--dark-accent) !important;
+  }
+  .dropdown-arrow {
+    polygon {
+      fill: var(--dark-accent);
+    }
+  }
+  &[open]::backdrop {
+    background-color: var(--dark-accent);
+    opacity: 0.8;
+  }
   h1 {
     margin-block: 0;
     padding-block: 0;
-    color: var(--accent-dark);
     font-size: 1.5rem;
   }
   label {
@@ -61,41 +90,68 @@ dialog {
     width: 100%;
   }
 }
+@starting-style {
+  dialog {
+    opacity: 1;
+  }
+  dialog[open] {
+    opacity: 0;
+  }
+}
+a {
+  background: var(--navigation-background);
+  color: var(--link-color);
+  text-decoration: none;
+  text-align: start;
+  user-select: none;
 
+  &:hover:not(.isActive) {
+    filter: contrast(200%);
+  }
+}
+header:not(dialog header) {
+  position: sticky;
+  inset-block-start: 0;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column-start: start;
+  grid-column-end: 4;
+  margin-block-start: 0;
+  background-color: var(--header-background-color);
+  color: var(--header-color);
+
+  &:before {
+    content: '';
+    position: absolute;
+    inset-block-start: 15px;
+    inset-block-end: 15px;
+    inset-inline-start: 15px;
+    inset-inline-end: 15px;
+    filter: blur(10px);
+  }
+
+  h1 {
+    position: relative;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-wrap: balance;
+    padding-inline: 1rem;
+  }
+}
 button {
   --hover-transition-duration: 0.2s;
-  border: 1px solid var(--accent);
-  background-color: var(--control);
-  transition: background-color var(--hover-transition-duration) 0.1s ease;
-  color: black;
+  background-color: var(--prominent-background);
+  border: 3px solid var(--dark-accent);
+  color: var(--prominent-color);
+  transition: filter 0.3s ease;
   padding-inline: 2ch;
   padding-block: 1ch;
-  border-radius: 1ch;
   position: relative;
   z-index: 1;
   overflow: hidden;
 
-  &::before {
-    transition: width var(--hover-transition-duration) ease,
-      transform var(--hover-transition-duration) ease,
-      border-radius var(--hover-transition-duration) ease,
-      inset-inline-start var(--hover-transition-duration) ease;
-    position: absolute;
-    inset-block-start: 0px;
-    inset-inline-start: 50%;
-    inset-block-end: 0;
-    border-radius: 2ch;
-    width: 0;
-    background-color: var(--accent);
-    z-index: -1;
-  }
   &:hover {
-    background-color: var(--accent);
-    &::before {
-      inset-inline-end: 0;
-      inset-inline-start: 0;
-      border-radius: 1ch;
-    }
+    filter: brightness(1.1);
   }
 }
 
@@ -107,10 +163,17 @@ ul {
 }
 
 kbd {
-  border: 1px solid var(--accent-dark);
-  background-color: var(--default);
+  border: 1px solid var(--dark-accent);
+  background-color: var(--site-color-primary);
   display: inline-block;
   padding: 0.2ch;
   border-radius: 2px;
   margin-block: 5px;
+}
+
+/* Override calendar styles */
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--prominent-background) !important;
 }

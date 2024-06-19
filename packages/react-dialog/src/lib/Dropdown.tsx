@@ -66,6 +66,7 @@ export const Dropdown: FC<DropdownProps> = ({
           style={{
             ...getArrowStyles({ middlewareData }),
           }}
+          className="dropdown-arrow"
           width={arrowDimensions.width}
           height={arrowDimensions.height}
           viewBox="0 0 100 100"

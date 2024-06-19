@@ -4,7 +4,7 @@ export default function DropdownPage() {
   return (
     <>
       <div style={{ display: 'flex', gap: 20 }}>
-        <Dropdown targetLabel="Open dropdown" style={{ width: 400 }}>
+        <Dropdown targetLabel="Open down">
           <h1>Dropdown</h1>
           <main>
             <p>
@@ -32,11 +32,7 @@ export default function DropdownPage() {
             </ul>
           </main>
         </Dropdown>
-        <Dropdown
-          targetLabel="Open to the left"
-          style={{ width: 400 }}
-          placement="left"
-        >
+        <Dropdown targetLabel="Open left" placement="left">
           <h1>Dropdown</h1>
           <main>
             <p>
@@ -61,11 +57,7 @@ export default function DropdownPage() {
             </ul>
           </main>
         </Dropdown>
-        <Dropdown
-          targetLabel="Open to the right"
-          style={{ width: 400 }}
-          placement="right"
-        >
+        <Dropdown targetLabel="Open right" placement="right">
           <h1>Dropdown</h1>
           <main>
             <p>
@@ -90,11 +82,7 @@ export default function DropdownPage() {
             </ul>
           </main>
         </Dropdown>
-        <Dropdown
-          targetLabel="Open to the top"
-          style={{ width: 400 }}
-          placement="top"
-        >
+        <Dropdown targetLabel="Open up" placement="top">
           <h1>Dropdown</h1>
           <main>
             <p>
