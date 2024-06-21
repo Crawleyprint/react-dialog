@@ -118,10 +118,6 @@ dialog {
   }
 }
 a {
-  --step-1: 2%
-  --step-2: 2%
-  --step-3: 98%;
-  --step-4: 100%;
   background: var(--navigation-background);
   color: var(--link-color);
   text-decoration: none;
@@ -131,7 +127,7 @@ a {
 
   &:hover:not(.isActive) {
     border: 2px solid transparent;
-    animation: link-hover .1s;
+    animation: link-hover 0.1s;
     animation-fill-mode: forwards;
   }
 }
@@ -139,10 +135,10 @@ header:not(dialog header) {
   position: sticky;
   inset-block-start: 0;
   display: grid;
-  border-bottom: 0.2rem solid var(--site-text-color);
   grid-template-columns: subgrid;
   grid-column-start: start;
   grid-column-end: 4;
+  border-bottom: 0.2rem solid var(--site-text-color);
   margin-block-start: 0;
   background-color: color(
     from var(--header-background-color) display-p3 r g b / 0.6
@@ -211,52 +207,68 @@ kbd {
 @keyframes link-hover {
   0% {
     border-image: linear-gradient(
-      45deg,
-      var(--link-color),
-      transparent,
-      transparent,
-      transparent,
-      transparent,
-      var(--link-color)
-    )
-    1;
+        45deg,
+        var(--link-color),
+        transparent,
+        transparent,
+        transparent,
+        transparent,
+        var(--link-color)
+      )
+      1;
   }
   24% {
     border-image: linear-gradient(
-      45deg,
-      var(--link-color),
-      transparent,
-      transparent,
-      transparent,
-      var(--link-color)
-    )
-    1;
+        45deg,
+        var(--link-color),
+        transparent,
+        transparent,
+        transparent,
+        var(--link-color)
+      )
+      1;
   }
   50% {
     border-image: linear-gradient(
-      45deg,
-      var(--link-color),
-      transparent,
-      transparent,
-      var(--link-color)
-    )
-    1;
+        45deg,
+        var(--link-color),
+        transparent,
+        transparent,
+        var(--link-color)
+      )
+      1;
   }
   75% {
     border-image: linear-gradient(
-      45deg,
-      var(--link-color),
-      transparent,
-      var(--link-color)
-    )
-    1;
+        45deg,
+        var(--link-color),
+        transparent,
+        var(--link-color)
+      )
+      1;
   }
   100% {
-    border-image: linear-gradient(
-      45deg,
-      var(--link-color),
-      var(--link-color)
-    )
-    1;
+    border-image: linear-gradient(45deg, var(--link-color), var(--link-color)) 1;
+  }
+}
+
+footer {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column-start: start;
+  grid-column-end: 4;
+  grid-row: footer;
+  background-color: color(
+    from var(--header-background-color) display-p3 r g b / 0.6
+  );
+
+  nav {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+
+    a {
+      --link-color: var(var(--site-text-color));
+    }
   }
 }

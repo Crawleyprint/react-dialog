@@ -62,6 +62,23 @@ export function App() {
           <Route path="/dropdown-with-hooks" element={<DropdownWithHooks />} />
         </Routes>
       </main>
+      <footer>
+        <nav className={styles.navigation}>
+          <a
+            href="https://https://crawleyprint.github.io/react-dialog/"
+            target="_blank"
+          >
+            Github
+          </a>
+          <span className={styles.separator}>/</span>
+          <a
+            href="https://www.npmjs.com/package/@crawleyprint/react-dialog"
+            target="_blank"
+          >
+            npm
+          </a>
+        </nav>
+      </footer>
     </div>
   );
 }
