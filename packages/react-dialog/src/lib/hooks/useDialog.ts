@@ -43,7 +43,7 @@ export function useDialog({
     return () => {
       window.removeEventListener('keydown', handleCloseDialogOnEsc);
     };
-  });
+  }, [closeDialog]);
 
   return {
     openDialog,
