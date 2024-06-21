@@ -166,15 +166,20 @@ button {
   font-size: 1rem;
   font-weight: bold;
   border: 0;
-  transition: filter 0.3s ease;
+  transition: background-color box-shadow 0.2s ease;
   padding-inline: 2ch;
   padding-block: 1ch;
   position: relative;
   z-index: 1;
   overflow: hidden;
+  cursor: pointer;
 
   &:hover {
-    filter: brightness(1.1);
+    background-color: var(--header-background-color);
+    background-color: color(
+      from var(--header-background-color) display-p3 r g b / 0.8
+    );
+    box-shadow: 0.6ch 0.6ch var(--site-text-color);
   }
   &:focus {
     box-shadow: 0 0 var(--site-text-color);
