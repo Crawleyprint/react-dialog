@@ -87,6 +87,9 @@ export function App() {
           >
             npm
           </a>
+          <p className={styles.separator}>
+            &copy; Copyrignt {new Date().getFullYear()} @crawleyprint
+          </p>
         </nav>
       </footer>
     </div>
