@@ -35,12 +35,17 @@
     display: inline-block;
     padding: 0.5ch;
     margin-block: 0.2ch;
-  }
-  .isActive {
-    outline: none;
-    background-color: var(--prominent-background);
-    color: var(--prominent-color);
-    text-decoration: none;
+    &.isActive,
+    &:active {
+      outline: none;
+      background-color: var(--site-primary-color-2);
+      color: var(--site-primary-color-1);
+      text-decoration: none;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: var(--site-secondary-color-2);
+      }
+    }
   }
 }
 

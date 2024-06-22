@@ -44,11 +44,21 @@ export function App() {
           <h2>Examples</h2>
           {navRoutes.map(({ url, title }, index) => (
             <>
-              <NavLink key={url} className={getNavLinkClasses(styles)} to={url}>
+              <NavLink
+                key={url + index}
+                tabIndex={0}
+                className={getNavLinkClasses(styles)}
+                to={url}
+              >
                 {title}
               </NavLink>
               {navRoutes.length !== index + 1 ? (
-                <span className={styles.separator}>/</span>
+                <span
+                  key={`separator-${url}-${index}`}
+                  className={styles.separator}
+                >
+                  /
+                </span>
               ) : null}
             </>
           ))}

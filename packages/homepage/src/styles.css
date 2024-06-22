@@ -1,33 +1,38 @@
 :root {
-  --site-background-color: #f1f7ed;
-  --site-text-color: color(display-p3 0.22 0.22 0.2);
+  color-scheme: light dark;
+  --site-primary-color-1: #f1f7ed;
+  --site-primary-color-2: color(display-p3 0.22 0.22 0.2);
 
-  --header-background-color: color(display-p3 1 0.52 0);
-  --header-color: color(display-p3 0.22 0.22 0.2);
-
-  --prominent-background: #b33951;
-  --prominent-color: #f1f7ed;
-
-  --link-color: color(display-p3 0.43 0.09 0);
-  --link-color-highlighted: #ffffff;
-
-  --dark-accent: #54494b;
+  --site-secondary-color-1: color(display-p3 1 0.52 0);
+  --site-secondary-color-2: color(display-p3 0.22 0.22 0.2);
 
   --base-font-size: 16px;
-  --animation-duration: 0.5s;
-}
 
+  --transition-duration: 0.2s;
+  --transition-duration-short: 0.1s
+  --transition-duration-long: 0.5s;
+
+  --shadow-color: var(--site-primary-color-2);
+}
 * {
   box-sizing: border-box;
+
+  &:focus {
+    z-index: 1000;
+    outline: 2px dashed transparent;
+    transition: outline;
+    transition-duration: var(--transition-duration-short);
+    outline-offset: 2px;
+  }
 }
 
 html {
   min-height: 100dvh;
-  background: var(--site-background-color);
+  background: var(--site-primary-color-1);
+  color: var(--site-primary-color-2);
 }
 
 body {
-  color: var(--site-text-color);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 0;
@@ -36,46 +41,48 @@ body {
 
 h2 {
   background-color: var(
-    --header-background-color
+    --site-secondary-color-1
   ); /* be nice to firefox users */
   background-color: color(
-    from var(--header-background-color) display-p3 r g b / 0.5
+    from var(--site-secondary-color-1) display-p3 r g b / 0.5
   );
-  box-shadow: 0.2ch 0.2ch var(--site-text-color);
+  box-shadow: 0.2ch 0.2ch var(--shadow-color);
   padding-inline: 1ch;
   padding-block: 0.3ch;
   margin-inline: -1ch;
+  margin-block-end: 2ch;
 }
 
 :focus {
-  outline: 2px solid var(--prominent-background);
-  outline-offset: 2px;
-  z-index: 1000;
+  outline: 2px dashed var(--site-primary-color-2);
 }
 dialog[open] {
   opacity: 1;
-  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
-    display 0.5s ease allow-discrete;
+  color: var(--site-primary-color-2);
 }
 dialog {
-  background-color: var(--site-background-color);
-  border: 2px solid var(--dark-accent);
+  background-color: var(--site-primary-color-1);
+  border: 2px solid var(--site-primary-color-2);
   opacity: 0;
-  transition: opacity 0.5s ease, overlay 0.5s ease allow-discrete,
-    display 0.5s ease allow-discrete;
+  transition: opacity ease, overlay ease allow-discrete,
+    display ease allow-discrete;
+  transition-duration: var(--transition-duration-long);
   max-width: calc(100dvw - 2ch);
+
   &[class*='dropdown'] > div {
     max-width: min(calc(100dvw - 2ch), 350px);
-    border: 2px solid var(--dark-accent) !important;
+    border: 2px solid var(--site-primary-color-2) !important;
+    background-color: var(--site-primary-color-1);
   }
   .dropdown-arrow {
     polygon {
-      fill: var(--dark-accent);
+      fill: var(--site-primary-color-2);
     }
   }
   &[open]::backdrop {
-    background-color: var(--dark-accent);
+    background-color: var(--site-primary-color-2);
     opacity: 0.8;
+    backdrop-filter: blur(30px);
   }
   h1 {
     margin-block: 0;
@@ -104,7 +111,6 @@ dialog {
     }
   }
   button {
-    border: 0;
     display: block;
     width: 100%;
   }
@@ -118,34 +124,25 @@ dialog {
   }
 }
 a {
-  background: var(--navigation-background);
-  color: var(--link-color);
+  color: var(--site-primary-color-2);
   text-decoration: none;
   text-align: start;
   user-select: none;
   border: 2px solid transparent;
+  background-color: transparent;
+  transition: background-color;
+  transition-duration: var(--transition-duration-short);
 
   &:hover:not(.isActive) {
     border: 2px solid transparent;
-    animation: link-hover 0.1s;
+    animation: link-hover;
+    animation-duration: 0.1s;
     animation-fill-mode: forwards;
   }
 }
 header:not(dialog header) {
-  position: sticky;
   inset-block-start: 0;
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-column-start: start;
-  grid-column-end: 4;
-  border-bottom: 0.2rem solid var(--site-text-color);
-  margin-block-start: 0;
-  background-color: color(
-    from var(--header-background-color) display-p3 r g b / 0.6
-  );
-  color: var(--header-color);
-  -webkit-backdrop-filter: blur(10px); /** be nice to safari users **/
-  backdrop-filter: blur(10px);
+  border-bottom: 0.2rem solid;
   h1 {
     position: relative;
     grid-column-start: 2;
@@ -154,19 +151,44 @@ header:not(dialog header) {
     padding-inline: 1rem;
   }
 }
-button {
-  --hover-transition-duration: 0.2s;
-  background-color: var(--header-background-color);
+footer:not(dialog header),
+header:not(dialog header) {
+  position: sticky;
+  display: grid;
+  border-color: var(--site-primary-color-2);
+  grid-template-columns: subgrid;
+  grid-column-start: start;
+  grid-column-end: 4;
+  margin-block-start: 0;
+  color: var(--site-secondary-color-2);
+  -webkit-backdrop-filter: blur(10px); /** be nice to safari users **/
+  backdrop-filter: blur(10px);
   background-color: color(
-    from var(--header-background-color) display-p3 r g b / 0.6
+    from var(--site-secondary-color-1) display-p3 r g b / 0.6
   );
-  box-shadow: 0.3ch 0.3ch var(--site-text-color);
-  transition: box-shadow var(--animation-duration);
-  color: var(--site-text-color);
+}
+footer:not(dialog header) {
+  z-index: 1000;
+  bottom: 0;
+  border-top: 0.2rem solid;
+  nav {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+  }
+}
+button {
+  background-color: var(--site-secondary-color-1);
+  background-color: color(
+    from var(--site-secondary-color-1) display-p3 r g b / 0.6
+  );
+  box-shadow: 0.3ch 0.3ch var(--shadow-color);
+  transition: box-shadow;
+  transition-duration: var(--transition-duration);
+  color: var(--site-primary-color-2);
   font-size: 1rem;
   font-weight: bold;
-  border: 0;
-  transition: background-color box-shadow 0.2s ease;
+  border: 1px solid transparent;
   padding-inline: 2ch;
   padding-block: 1ch;
   position: relative;
@@ -175,14 +197,14 @@ button {
   cursor: pointer;
 
   &:hover {
-    background-color: var(--header-background-color);
+    background-color: var(--site-secondary-color-1);
     background-color: color(
-      from var(--header-background-color) display-p3 r g b / 0.8
+      from var(--site-secondary-color-1) display-p3 r g b / 0.8
     );
-    box-shadow: 0.6ch 0.6ch var(--site-text-color);
+    box-shadow: 0.6ch 0.6ch var(--shadow-color);
   }
   &:focus {
-    box-shadow: 0 0 var(--site-text-color);
+    box-shadow: 0 0 var(--shadow-color);
   }
 }
 
@@ -194,8 +216,8 @@ ul {
 }
 
 kbd {
-  border: 1px solid var(--dark-accent);
-  background-color: var(--prominent-color);
+  border: 1px solid var(--site-primary-color-2);
+  background-color: var(--site-primary-color-1);
   display: inline-block;
   padding: 0.2ch;
   border-radius: 2px;
@@ -203,77 +225,117 @@ kbd {
 }
 
 /* Override calendar styles */
+.rdp-button {
+  box-shadow: none !important;
+}
 .rdp-day_selected,
 .rdp-day_selected:focus-visible,
 .rdp-day_selected:hover {
-  background-color: var(--prominent-background) !important;
+  background-color: var(--site-secondary-color-1) !important;
 }
 
 @keyframes link-hover {
   0% {
     border-image: linear-gradient(
         45deg,
-        var(--link-color),
+        var(--shadow-color),
         transparent,
         transparent,
         transparent,
         transparent,
-        var(--link-color)
+        var(--shadow-color)
       )
       1;
   }
   24% {
     border-image: linear-gradient(
         45deg,
-        var(--link-color),
+        var(--shadow-color),
         transparent,
         transparent,
         transparent,
-        var(--link-color)
+        var(--shadow-color)
       )
       1;
   }
   50% {
     border-image: linear-gradient(
         45deg,
-        var(--link-color),
+        var(--shadow-color),
         transparent,
         transparent,
-        var(--link-color)
+        var(--shadow-color)
       )
       1;
   }
   75% {
     border-image: linear-gradient(
         45deg,
-        var(--link-color),
+        var(--shadow-color),
         transparent,
-        var(--link-color)
+        var(--shadow-color)
       )
       1;
   }
   100% {
-    border-image: linear-gradient(45deg, var(--link-color), var(--link-color)) 1;
+    border-image: linear-gradient(
+        45deg,
+        var(--shadow-color),
+        var(--shadow-color)
+      )
+      1;
   }
 }
 
-footer {
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-column-start: start;
-  grid-column-end: 4;
-  grid-row: footer;
-  background-color: color(
-    from var(--header-background-color) display-p3 r g b / 0.6
-  );
-
-  nav {
-    grid-column: 2;
-    display: flex;
-    align-items: center;
-
-    a {
-      --link-color: var(var(--site-text-color));
+@media (prefers-color-scheme: dark) {
+  :root {
+    --site-primary-color-2: #f1f7ed;
+    --site-primary-color-1: color(display-p3 0.11 0.11 0.1);
+    --site-secondary-color-1: color(display-p3 0 0 0);
+    --site-secondary-color-2: color(display-p3 1 0.52 0);
+    --shadow-color: var(--site-secondary-color-2);
+  }
+  h2 {
+    color: var(--shadow-color);
+  }
+  dialog {
+    border-color: var(--shadow-color);
+    &[open]::backdrop {
+      background-color: var(--site-secondary-color-1);
     }
+    &[class*='dropdown'] > div {
+      border: 2px solid var(--shadow-color) !important;
+      background-color: var(--site-secondary-color-1);
+    }
+    .dropdown-arrow {
+      polygon {
+        fill: var(--site-secondary-color-2);
+      }
+    }
+  }
+  footer:not(dialog header),
+  header:not(dialog header) {
+    border-color: var(--site-secondary-color-2);
+  }
+  button {
+    color: var(--site-secondary-color-2);
+    border: 1px solid color(from var(--shadow-color) display-p3 r g b / 0.5);
+  }
+  .rdp-button:hover {
+    background-color: var(--site-secondary-color-2) !important;
+  }
+  :focus {
+    outline: 2px dashed var(--site-secondary-color-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-duration: 0;
+    --transition-duration-short: 0;
+    --transition-duration-long: 0;
+  }
+  a:not(.isActive):hover {
+    animation-duration: 0s;
   }
 }
