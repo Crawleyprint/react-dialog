@@ -105,7 +105,7 @@ export function App() {
             <a onClick={copyUrl}>Copy URL</a>
           </nav>
           <p className={styles.separator}>
-            &copy; Copyrignt {new Date().getFullYear()} @crawleyprint
+            &copy; Copyright {new Date().getFullYear()} @crawleyprint
           </p>
         </section>
       </footer>
