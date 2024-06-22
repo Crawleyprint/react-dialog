@@ -75,7 +75,7 @@ export function App() {
       <footer>
         <nav className={styles.navigation}>
           <a
-            href="https://https://crawleyprint.github.io/react-dialog/"
+            href="https://crawleyprint.github.io/react-dialog/"
             target="_blank"
           >
             Github

@@ -16,7 +16,7 @@ export default function DropdownPage() {
   }, [isMobile]);
   return (
     <>
-      <div style={{ display: 'flex', gap: 20 }}>
+      <div className="dropdown-grid">
         <Dropdown targetLabel="Open down">
           <h1>Dropdown</h1>
           <main>
