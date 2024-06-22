@@ -1,6 +1,19 @@
-import { Dropdown } from '@crawleyprint/react-dialog';
+import { Dropdown as LibDropdown, Dialog } from '@crawleyprint/react-dialog';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function DropdownPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  // naive implementation of mobile device detection
+  useEffect(() => {
+    function onWindowResize() {
+      setIsMobile(window.innerWidth < 1000);
+    }
+    window.addEventListener('resize', onWindowResize);
+    return () => window.removeEventListener('resize', onWindowResize);
+  }, []);
+  const Dropdown = useMemo(() => {
+    return isMobile ? Dialog : LibDropdown;
+  }, [isMobile]);
   return (
     <>
       <div style={{ display: 'flex', gap: 20 }}>
