@@ -17,6 +17,18 @@ export default function DropdownPage() {
   }, [isMobile]);
   return (
     <>
+      <p>
+        Dialogs and dropdowns have much in common, but there are some
+        differences. Dropdowns are usually tied to an anchor element, while
+        dialogs are shown at the center of the screen. Dropdowns can also be
+        placed on each side of the anchor element. Calculating the positioning
+        of these elements is a full-time job, so instead of creating my own
+        solution, I've decided to use the excellent{' '}
+        <a href="https://floating-ui.com/docs/usefloating" target="_blank">
+          @floating-ui/react-dom
+        </a>
+        library.
+      </p>
       {isMobile ? (
         <p>
           <i>
