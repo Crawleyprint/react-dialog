@@ -18,7 +18,7 @@ export default function DropdownPage() {
   return (
     <>
       <div className="dropdown-grid">
-        <Dropdown targetLabel="Open down">
+        <Dropdown targetLabel="Open &#x2193;">
           <h1>Dropdown</h1>
           <main>
             <p>
@@ -46,7 +46,7 @@ export default function DropdownPage() {
             </ul>
           </main>
         </Dropdown>
-        <Dropdown targetLabel="Open left" placement="left">
+        <Dropdown targetLabel="Open &#x2190;" placement="left">
           <h1>Dropdown</h1>
           <main>
             <p>
@@ -71,7 +71,7 @@ export default function DropdownPage() {
             </ul>
           </main>
         </Dropdown>
-        <Dropdown targetLabel="Open right" placement="right">
+        <Dropdown targetLabel="Open &#x2192;" placement="right">
           <h1>Dropdown</h1>
           <main>
             <p>
@@ -96,7 +96,7 @@ export default function DropdownPage() {
             </ul>
           </main>
         </Dropdown>
-        <Dropdown targetLabel="Open up" placement="top">
+        <Dropdown targetLabel="Open &#x2191;" placement="top">
           <h1>Dropdown</h1>
           <main>
             <p>
