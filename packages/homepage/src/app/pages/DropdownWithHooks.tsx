@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useDropdown } from '@crawleyprint/react-dialog'; // Make sure the path is correct
 import css from '../app.module.css';
+import { autoPlacement } from '@floating-ui/react-dom';
 
 const DropdownWithHooks = () => {
   const dialogRef = useRef(null);
@@ -9,7 +10,7 @@ const DropdownWithHooks = () => {
   const { open, openDialog, closeDialog, floatingStyles } = useDropdown({
     dialog: dialogRef.current,
     anchor: anchorRef.current,
-    floating: { placement: 'bottom', middleware: [] },
+    floating: { placement: 'bottom', middleware: [autoPlacement()] },
   });
 
   return (

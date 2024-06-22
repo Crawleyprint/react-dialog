@@ -5,9 +5,8 @@ import css from '../app.module.css';
 export default function StandaloneHooks() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const targetRef = useRef<HTMLButtonElement>(null);
-  const { openDialog, closeDialog, styles } = useDialog({
+  const { openDialog, closeDialog } = useDialog({
     dialog: dialogRef.current,
-    trigger: targetRef.current,
   });
 
   function show() {
@@ -21,7 +20,7 @@ export default function StandaloneHooks() {
       <button className="btn" onClick={show} ref={targetRef}>
         Open with hook
       </button>
-      <dialog ref={dialogRef} className={css.dialog} style={styles}>
+      <dialog ref={dialogRef} className={css.dialog}>
         <p>Dialog content</p>
         <button onClick={hide} className="btn">
           Close button implemented with hook
