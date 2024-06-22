@@ -151,6 +151,7 @@ a {
   }
 }
 header:not(dialog header) {
+  z-index: 1000;
   inset-block-start: 0;
   border-bottom: 0.2rem solid;
   h1 {
