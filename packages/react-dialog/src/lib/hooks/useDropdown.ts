@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect } from 'react';
 import { useDialog } from './useDialog';
+import { getFocusableElements } from '../utils';
 import { useFloating, autoUpdate } from '@floating-ui/react-dom';
 import type { IUseDropdown, IUseDropdownReturn } from '../types';
 
@@ -23,7 +24,6 @@ export function useDropdown({
     refs.setReference(anchor);
     refs.setFloating(dialog);
   }, [dialog, anchor]);
-
   useLayoutEffect(() => {
     if (!open) return;
     if (dialog) {
@@ -32,27 +32,7 @@ export function useDropdown({
        * that focus is properly set in Safari
        */
       setTimeout(() => {
-        const focusableElements = Array.from(
-          dialog?.querySelectorAll(
-            [
-              'a[href]',
-              'select',
-              'button',
-              'textarea',
-              'input:not([type=hidden])',
-              '[tabindex]',
-            ].join(', ')
-          ) ?? []
-        ).filter((el) => {
-          const hasTabIndexValue = el.hasAttribute('tabindex');
-          const isDisabled = el.hasAttribute('disabled');
-          if (hasTabIndexValue) {
-            if (Number(el.getAttribute('tabindex')) < 0) {
-              return false;
-            }
-          }
-          return !isDisabled;
-        });
+        const focusableElements = getFocusableElements(dialog);
         (focusableElements?.[0] as HTMLElement)?.focus();
       }, 0);
     }
