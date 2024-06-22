@@ -12,6 +12,7 @@ import { getNavLinkClasses } from './utils/navigation';
 import StandaloneHooks from './pages/StandaloneHooks';
 import DropdownWithHooks from './pages/DropdownWithHooks';
 
+const canShare = typeof navigator.share === 'function';
 export function App() {
   function share() {
     navigator?.share?.({ url: window.location.href });
@@ -94,10 +95,12 @@ export function App() {
             >
               npm
             </a>
-            <>
-              <span className={styles.separator}>/</span>
-              <a onClick={share}>Share</a>
-            </>
+            {canShare ? (
+              <>
+                <span className={styles.separator}>/</span>
+                <a onClick={share}>Share</a>
+              </>
+            ) : null}
             <span className={styles.separator}>/</span>
             <a onClick={copyUrl}>Copy URL</a>
           </nav>
