@@ -13,6 +13,12 @@ import StandaloneHooks from './pages/StandaloneHooks';
 import DropdownWithHooks from './pages/DropdownWithHooks';
 
 export function App() {
+  function share() {
+    navigator?.share?.({ url: window.location.href });
+  }
+  function copyUrl() {
+    navigator.clipboard.writeText(window.location.href);
+  }
   return (
     <div className={styles['container']}>
       <header>
@@ -73,24 +79,32 @@ export function App() {
         </Routes>
       </main>
       <footer>
-        <nav className={styles.navigation}>
-          <a
-            href="https://github.com/Crawleyprint/react-dialog"
-            target="_blank"
-          >
-            Github
-          </a>
-          <span className={styles.separator}>/</span>
-          <a
-            href="https://www.npmjs.com/package/@crawleyprint/react-dialog"
-            target="_blank"
-          >
-            npm
-          </a>
+        <section>
+          <nav className={styles.navigation}>
+            <a
+              href="https://github.com/Crawleyprint/react-dialog"
+              target="_blank"
+            >
+              Github
+            </a>
+            <span className={styles.separator}>/</span>
+            <a
+              href="https://www.npmjs.com/package/@crawleyprint/react-dialog"
+              target="_blank"
+            >
+              npm
+            </a>
+            <>
+              <span className={styles.separator}>/</span>
+              <a onClick={share}>Share</a>
+            </>
+            <span className={styles.separator}>/</span>
+            <a onClick={copyUrl}>Copy URL</a>
+          </nav>
           <p className={styles.separator}>
             &copy; Copyrignt {new Date().getFullYear()} @crawleyprint
           </p>
-        </nav>
+        </section>
       </footer>
     </div>
   );

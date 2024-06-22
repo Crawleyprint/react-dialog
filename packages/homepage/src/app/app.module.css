@@ -4,7 +4,7 @@
   width: 100%;
   min-height: 100dvh;
   display: grid;
-  grid-template-rows: max-content 1fr [footer] 60px;
+  grid-template-rows: max-content 1fr [footer] max-content;
   grid-template-columns:
     [start] 1fr
     [content] minmax(300px, 600px)
