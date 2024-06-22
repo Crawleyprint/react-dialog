@@ -30,7 +30,8 @@
   font-weight: 800;
 }
 .navigation {
-  a {
+  a,
+  [class='plain-link'] {
     display: inline-block;
     padding: 0.5ch;
     margin-block: 0.2ch;

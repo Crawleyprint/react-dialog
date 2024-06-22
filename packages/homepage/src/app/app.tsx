@@ -191,11 +191,15 @@ export function App() {
             {canShare ? (
               <>
                 <span className={styles.separator}>/</span>
-                <a onClick={share}>Share</a>
+                <span className="plain-link" onClick={share}>
+                  Share
+                </span>
               </>
             ) : null}
             <span className={styles.separator}>/</span>
-            <a onClick={copyUrl}>Copy URL</a>
+            <span className="plain-link" onClick={copyUrl}>
+              Copy URL
+            </span>
           </nav>
           <p className={styles.separator}>
             &copy; Copyright {new Date().getFullYear()} @crawleyprint

@@ -133,8 +133,11 @@ dialog {
     opacity: 0;
   }
 }
-a {
+
+a, .plain-link {
   color: var(--site-primary-color-2);
+  cursor: pointer;
+  text-decoration: underline;
   text-align: start;
   user-select: none;
   border: 2px solid transparent;
