@@ -9,6 +9,7 @@ export default function DropdownPage() {
       setIsMobile(window.innerWidth < 1000);
     }
     window.addEventListener('resize', onWindowResize);
+    onWindowResize();
     return () => window.removeEventListener('resize', onWindowResize);
   }, []);
   const Dropdown = useMemo(() => {
