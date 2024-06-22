@@ -17,6 +17,14 @@ export default function DropdownPage() {
   }, [isMobile]);
   return (
     <>
+      {isMobile ? (
+        <p>
+          <i>
+            Since you're viewing this on a smaller screen, all dropdowns will
+            open in dialog mode to stay visible.
+          </i>
+        </p>
+      ) : null}
       <div className="dropdown-grid">
         <Dropdown targetLabel="Open &#x2193;">
           <h1>Dropdown</h1>

@@ -372,6 +372,12 @@ kbd {
   }
 }
 
+@media (max-width: 1000px) {
+  p {
+    text-align: left;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --transition-duration: 0;
