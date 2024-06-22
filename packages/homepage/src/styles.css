@@ -16,7 +16,7 @@
 }
 * {
   box-sizing: border-box;
-
+  line-height: 1.3;
   &:focus {
     z-index: 1000;
     outline: 2px dashed transparent;
@@ -50,9 +50,19 @@ h2 {
   padding-inline: 1ch;
   padding-block: 0.3ch;
   margin-inline: -1ch;
+  margin-block-start: 2ch;
   margin-block-end: 2ch;
-}
 
+  &:first-child {
+    margin-block-start: 0;
+  }
+}
+p {
+  margin-block-end: 2.2ch;
+  &:last-child {
+    margin-block-end: 0.5ch;
+  }
+}
 :focus {
   outline: 2px dashed var(--site-primary-color-2);
 }
@@ -125,7 +135,6 @@ dialog {
 }
 a {
   color: var(--site-primary-color-2);
-  text-decoration: none;
   text-align: start;
   user-select: none;
   border: 2px solid transparent;
@@ -134,6 +143,7 @@ a {
   transition-duration: var(--transition-duration-short);
 
   &:hover:not(.isActive) {
+    text-decoration: none;
     border: 2px solid transparent;
     animation: link-hover;
     animation-duration: 0.1s;
@@ -171,14 +181,21 @@ footer:not(dialog header) {
   z-index: 1000;
   bottom: 0;
   border-top: 0.2rem solid;
+
   section {
     grid-column: 2;
     display: flex;
     flex-direction: column;
+    padding-block-end: .3ch;
+
+    p {
+      margin-block: 0;
+    }
   }
   nav {
     display: flex;
     align-items: center;
+
   }
 }
 button {
@@ -217,6 +234,12 @@ ul {
   padding: 0;
   height: auto;
   padding-block: 0.5ch;
+}
+
+ol {
+  li {
+    line-height: 1.5;
+  }
 }
 
 kbd {
@@ -357,4 +380,8 @@ kbd {
   a:not(.isActive):hover {
     animation-duration: 0s;
   }
+}
+
+.examples {
+  margin-block-end: 2ch;
 }

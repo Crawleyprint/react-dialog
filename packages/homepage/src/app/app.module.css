@@ -19,17 +19,16 @@
   padding-inline: 1rem;
   padding-block: 2ch;
   gap: 2ch;
-
-  section:first-child p:first-child:first-letter {
-    --size: 3;
-    --offset: 3;
-    initial-letter: var(--size) var(--offset); /* doesn't work in Safari */
-    -webkit-initial-letter: var(--size) var(--offset); /* works in Safari */
-    margin-inline-end: 0.5ch;
-    font-weight: 800;
-  }
 }
 
+.initial-letter:first-letter {
+  --size: 3;
+  --offset: 3;
+  initial-letter: var(--size) var(--offset); /* doesn't work in Safari */
+  -webkit-initial-letter: var(--size) var(--offset); /* works in Safari */
+  margin-inline-end: 0.5ch;
+  font-weight: 800;
+}
 .navigation {
   a {
     display: inline-block;
