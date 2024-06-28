@@ -1,3 +1,4 @@
+'use client';
 import { Dropdown as LibDropdown, Dialog } from '@crawleyprint/react-dialog';
 import { useEffect, useMemo, useState } from 'react';
 

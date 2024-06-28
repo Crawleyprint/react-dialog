@@ -4,6 +4,7 @@
     "jsx": "preserve",
     "allowJs": true,
     "esModuleInterop": true,
+    "composite": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,14 +19,21 @@
     ],
     "types": ["jest", "node"]
   },
+  "references": [
+    {
+      "path": "../homepage/tsconfig.json"
+    }
+  ],
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
+    "../homepage/**/*",
     "../../packages/server-rendered-example/.next/types/**/*.ts",
     "../../dist/packages/server-rendered-example/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

@@ -1,3 +1,4 @@
+'use client';
 import { Dialog } from '@crawleyprint/react-dialog';
 import { useState } from 'react';
 import { DayPicker } from 'react-day-picker';

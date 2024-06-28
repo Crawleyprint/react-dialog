@@ -39,7 +39,9 @@ export function App() {
               <NavLink
                 key={url + index}
                 tabIndex={0}
-                className={getNavLinkClasses(styles)}
+                className={`${styles['plain-link']} ${getNavLinkClasses(
+                  styles
+                )}`}
                 to={url}
               >
                 {title}
