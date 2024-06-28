@@ -112,6 +112,9 @@ just make sure names are matching in JSX and CSS):
 }
 ```
 
-## Running unit tests
+## Usage with React Server Components
 
-Run `nx test react-dialog` to execute the unit tests via [Vitest](https://vitest.dev/).
+If you're using RSC-first framework such as Next.js, you'll need to add `'use client';` to the parent component
+of the component you're using `Dialog` or `Dropdown` in.
+
+See full [Next.js example](../server-rendered-example/) for details.

@@ -1,10 +1,9 @@
 .dropdown {
   padding: 0;
   z-index: 1000;
-
-  polygon {
-    fill: white;
-  }
+}
+.dropdown:global(polygon) {
+  fill: white;
 }
 
 .dropdown__body {

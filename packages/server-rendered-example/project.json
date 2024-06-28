@@ -1,0 +1,9 @@
+{
+  "name": "server-rendered-example",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/server-rendered-example",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project server-rendered-example --web",
+  "targets": {}
+}

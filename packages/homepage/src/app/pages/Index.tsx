@@ -1,3 +1,4 @@
+'use client';
 import { Dialog } from '@crawleyprint/react-dialog';
 import { useRef, useState } from 'react';
 
