@@ -1,5 +1,6 @@
 import 'homepage/styles.css';
 import styles from 'homepage/app/app.module.css';
+import { Footer } from 'homepage/app/components/Footer';
 
 export const metadata = {
   title: 'React Dialog server-rendered example',
@@ -19,6 +20,7 @@ export default function RootLayout({
             <h1>HTML native dialogs in React</h1>
           </header>
           <main className={styles.content}>{children}</main>
+          <Footer />
         </div>
       </body>
     </html>

@@ -11,15 +11,10 @@ import { navRoutes } from './consts';
 import { getNavLinkClasses } from './utils/navigation';
 import StandaloneHooks from './pages/StandaloneHooks';
 import DropdownWithHooks from './pages/DropdownWithHooks';
+import { Footer } from './components/Footer';
+import { Credits } from './components/Credits';
 
-const canShare = typeof navigator.share === 'function';
 export function App() {
-  function share() {
-    navigator?.share?.({ url: window.location.href });
-  }
-  function copyUrl() {
-    navigator.clipboard.writeText(window.location.href);
-  }
   return (
     <div className={styles['container']}>
       <header>
@@ -133,81 +128,10 @@ export function App() {
             . Don't hesitate to open an issue if you try it and find it's
             missing something you'd need.
           </p>
-          <h2>Credit where credit's due</h2>
-          <p>
-            While I was working on this library, I've used the works of others,
-            mostly from these sources:
-            <ol>
-              <li>
-                <a
-                  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog"
-                  target="_blank"
-                >
-                  MDN Web Docs on dialog element
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://css-tricks.com/dialog-components-roll-your-own/"
-                  target="_blank"
-                >
-                  Rob Levin's excellent article on CSS Tricks
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element"
-                  target="_blank"
-                >
-                  HTML Spec for the dialog element
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/sjc5/use-html-dialog"
-                  target="_blank"
-                >
-                  This hook by Samuel J. Cook
-                </a>
-              </li>
-            </ol>
-          </p>
+          <Credits />
         </section>
       </main>
-      <footer>
-        <section>
-          <nav className={styles.navigation}>
-            <a
-              href="https://github.com/Crawleyprint/react-dialog"
-              target="_blank"
-            >
-              Github
-            </a>
-            <span className={styles.separator}>/</span>
-            <a
-              href="https://www.npmjs.com/package/@crawleyprint/react-dialog"
-              target="_blank"
-            >
-              npm
-            </a>
-            {canShare ? (
-              <>
-                <span className={styles.separator}>/</span>
-                <span className="plain-link" onClick={share}>
-                  Share
-                </span>
-              </>
-            ) : null}
-            <span className={styles.separator}>/</span>
-            <span className="plain-link" onClick={copyUrl}>
-              Copy URL
-            </span>
-          </nav>
-          <p className={styles.separator}>
-            &copy; Copyright {new Date().getFullYear()} @crawleyprint
-          </p>
-        </section>
-      </footer>
+      <Footer />
     </div>
   );
 }
