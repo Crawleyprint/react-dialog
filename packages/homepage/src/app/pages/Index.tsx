@@ -1,6 +1,6 @@
 'use client';
 import { Dialog } from '@crawleyprint/react-dialog';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 export default function Index() {
   const previousInputValue = useRef('');

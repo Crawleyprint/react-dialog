@@ -7,7 +7,7 @@ export default function EmbedAnything() {
   const [selected, setSelected] = useState<Date>();
   return (
     <>
-      <Dialog targetLabel="Open calendar" placement="down">
+      <Dialog targetLabel="Open calendar">
         <DayPicker mode="single" selected={selected} onSelect={setSelected} />
       </Dialog>
       <p>Selected Date is: {selected?.toISOString()}</p>
