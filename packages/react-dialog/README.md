@@ -9,7 +9,7 @@ creation of your own dialogs.
 
 ## Installation
 
-```
+```bash
 npm install @crawleyprint/react-dialog @floating-ui/react-dom --save
 ```
 
@@ -17,7 +17,7 @@ npm install @crawleyprint/react-dialog @floating-ui/react-dom --save
 
 Implements basic show and hide functionality of the dialog.
 
-```
+```typescript
 interface IUseDialog {
   dialog: HTMLDialogElement | null;
   style?: CSSProperties;
@@ -27,7 +27,7 @@ interface IUseDialog {
 
 returns:
 
-```
+```typescript
 interface IUseDialogReturn {
   openDialog: () => void;
   closeDialog: () => void;
@@ -37,7 +37,7 @@ interface IUseDialogReturn {
 
 Example dialog component:
 
-```
+```typescript
 import { useRef } from 'react';
 import { useDialog } from '@crawleyprint/react-dialog';
 
@@ -63,7 +63,7 @@ export function Dialog({buttonTitle, children}) {
 
 ### Create Dropdown component using hooks
 
-```
+```typescript
 import { useRef } from 'react';
 import { useDropdown } from '@crawleyprint/react-dialog'; // Make sure the path is correct
 
@@ -106,7 +106,7 @@ Additionally, bump the z-index up to your preference, so your dropdowns are visi
 You can do this by adding the following CSS to `.dropdown` (or whatever you want to name CSS class for the dropdown,
 just make sure names are matching in JSX and CSS):
 
-```
+```css
 .dropdown {
   z-index: 1000;
 }
