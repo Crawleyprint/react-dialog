@@ -7,7 +7,7 @@
     "strict": true,
     "types": ["vite/client", "vitest"]
   },
-  "files": [],
+  "files": ["**/*.ts", "**/*.tsx"],
   "include": ["jest-dom.d.ts"],
   "references": [
     {

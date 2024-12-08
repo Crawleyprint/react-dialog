@@ -23,7 +23,7 @@ export function useDropdown({
   useEffect(() => {
     refs.setReference(anchor);
     refs.setFloating(dialog);
-  }, [dialog, anchor]);
+  }, [dialog, anchor, refs]);
   useLayoutEffect(() => {
     if (!open) return;
     if (dialog) {
@@ -60,7 +60,7 @@ export function useDropdown({
     return () => {
       window.removeEventListener('click', closeOnClickOutside);
     };
-  }, [open]);
+  }, [open, closeOnClickOutside]);
 
   return {
     openDialog,

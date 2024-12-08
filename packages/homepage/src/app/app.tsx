@@ -72,6 +72,7 @@ export function App() {
             <a
               href="https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element"
               target="_blank"
+              rel="noreferrer"
             >
               HTML standard
             </a>
@@ -106,7 +107,7 @@ export function App() {
             on it without additional coding. Moreover, native dialogs don’t
             struggle with <code>overflow: hidden</code> and <code>z-index</code>{' '}
             issues because they are rendered on top of all other elements,
-            ensuring they are always visible and accessible.​
+            ensuring they are always visible and accessible.
           </p>
           <h2>Installation and usage</h2>
           <p>
@@ -115,6 +116,7 @@ export function App() {
             <a
               href="https://github.com/Crawleyprint/react-dialog"
               target="_blank"
+              rel="noreferrer"
             >
               Github
             </a>{' '}
@@ -122,6 +124,7 @@ export function App() {
             <a
               href="https://www.npmjs.com/package/@crawleyprint/react-dialog"
               target="_blank"
+              rel="noreferrer"
             >
               npm
             </a>

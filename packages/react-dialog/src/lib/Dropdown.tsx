@@ -10,7 +10,7 @@ export const Dropdown: FC<DropdownProps> = ({
   targetLabel,
   isOpen = false,
   style = {},
-  onClose = () => {},
+  onClose,
   placement = 'bottom',
   closeBtnLabel = 'Close',
   arrowDimensions = {

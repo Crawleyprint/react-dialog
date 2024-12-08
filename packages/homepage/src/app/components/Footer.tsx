@@ -11,7 +11,7 @@ export const Footer = () => {
           <a
             href="https://github.com/Crawleyprint/react-dialog"
             target="_blank"
-            className={styles['plain-link']}
+            className={styles['plain-link']} rel="noreferrer"
           >
             Github
           </a>
@@ -19,7 +19,7 @@ export const Footer = () => {
           <a
             href="https://www.npmjs.com/package/@crawleyprint/react-dialog"
             target="_blank"
-            className={styles['plain-link']}
+            className={styles['plain-link']} rel="noreferrer"
           >
             npm
           </a>

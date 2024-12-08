@@ -2,8 +2,7 @@ import { Dialog } from '@crawleyprint/react-dialog';
 
 export default function AlwaysOpen() {
   return (
-    <>
-      <Dialog
+    <Dialog
         isOpen
         targetLabel="Open again"
         style={{
@@ -17,6 +16,5 @@ export default function AlwaysOpen() {
           additional interactions.
         </p>
       </Dialog>
-    </>
   );
 }

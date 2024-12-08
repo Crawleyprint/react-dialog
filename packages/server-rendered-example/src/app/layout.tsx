@@ -1,3 +1,4 @@
+/*eslint-disable @nx/enforce-module-boundaries */
 import 'homepage/styles.css';
 import styles from 'homepage/app/app.module.css';
 import { Footer } from 'homepage/app/components/Footer';

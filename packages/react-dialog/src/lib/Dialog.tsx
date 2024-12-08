@@ -11,7 +11,7 @@ export const Dialog: FC<DialogProps> = ({
   targetLabel,
   closeBtnLabel = 'Close',
   children,
-  onClose = () => {},
+  onClose,
   isOpen = false,
   style = defaultStyle,
 }) => {

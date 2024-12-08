@@ -6,7 +6,7 @@ export function getNavLinkClasses(styles: Record<string, string>) {
     isActive: boolean;
     isPending: boolean;
   }) => {
-    let classes = [styles.navLink];
+    const classes = [styles.navLink];
     if (isActive) {
       classes.push(styles.isActive);
     }

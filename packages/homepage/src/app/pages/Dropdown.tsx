@@ -25,7 +25,7 @@ export default function DropdownPage() {
         placed on each side of the anchor element. Calculating the positioning
         of these elements is a full-time job, so instead of creating my own
         solution, I've decided to use the excellent{' '}
-        <a href="https://floating-ui.com/docs/usefloating" target="_blank">
+        <a href="https://floating-ui.com/docs/usefloating" target="_blank" rel="noreferrer">
           @floating-ui/react-dom
         </a>
         library.
@@ -147,7 +147,7 @@ export default function DropdownPage() {
       <div>
         <p>
           <sup>*</sup> Dropdowns use <code>useFloating()</code> hook from{' '}
-          <a href="https://floating-ui.com/docs/useFloating" target="_blank">
+          <a href="https://floating-ui.com/docs/useFloating" target="_blank" rel="noreferrer">
             @floating-ui/react-dom
           </a>{' '}
           to position themselves, and you can choose any of the middlewares they

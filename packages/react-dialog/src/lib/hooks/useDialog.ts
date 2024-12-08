@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IUseDialog, IUseDialogReturn } from '../types';
 
 export function useDialog({
@@ -13,9 +13,9 @@ export function useDialog({
     setOpen(true);
   };
 
-  const closeDialog = () => {
+  const closeDialog = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
   useEffect(() => {
     setOpen(isOpen);
@@ -32,7 +32,7 @@ export function useDialog({
     } else {
       dialogRef.current?.close();
     }
-  }, [dialog, open]);
+  }, [dialog, open, type]);
 
   useEffect(() => {
     const handleCloseDialogOnEsc = (e: KeyboardEvent) => {

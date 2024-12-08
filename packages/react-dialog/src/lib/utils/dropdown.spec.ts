@@ -1,4 +1,4 @@
-import { MiddlewareData } from '@floating-ui/react-dom';
+import { MiddlewareData, Placement } from '@floating-ui/react-dom';
 import {
   getArrowStyles,
   getDialogStyles,
@@ -98,18 +98,24 @@ describe('getDialogStyles()', () => {
       middlewareData: { offset: { placement: 'bottom' } } as MiddlewareData,
       arrowDimensions: { width: 10, height: 10 },
     };
+
+    function setPlacement(placement: Placement) {
+      if (config.middlewareData.offset) {
+        config.middlewareData.offset.placement = placement;
+      }
+    }
     let styles = getDialogStyles(config);
     expect(styles.paddingTop).toEqual(10);
-    config.middlewareData.offset!.placement = 'top';
+    setPlacement('top');
     styles = getDialogStyles(config);
     expect(styles.paddingBottom).toEqual(10);
-    config.middlewareData.offset!.placement = 'right';
+    setPlacement('right');
     styles = getDialogStyles(config);
     expect(styles.paddingLeft).toEqual(10);
-    config.middlewareData.offset!.placement = 'right-start';
+    setPlacement('right-start');
     styles = getDialogStyles(config);
     expect(styles.paddingLeft).toEqual(10);
-    config.middlewareData.offset!.placement = 'left';
+    setPlacement('left');
     styles = getDialogStyles(config);
     expect(styles).toEqual({
       ...constantStyles,
