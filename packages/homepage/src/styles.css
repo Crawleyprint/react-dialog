@@ -9,7 +9,7 @@
   --base-font-size: 16px;
 
   --transition-duration: 0.2s;
-  --transition-duration-short: 0.1s
+  --transition-duration-short: 0.1s;
   --transition-duration-long: 0.5s;
 
   --shadow-color: var(--site-primary-color-2);
@@ -134,7 +134,8 @@ dialog {
   }
 }
 
-a, .plain-link {
+a,
+.plain-link {
   color: var(--site-primary-color-2);
   cursor: pointer;
   text-decoration: underline;
@@ -190,7 +191,7 @@ footer:not(dialog header) {
     grid-column: 2;
     display: flex;
     flex-direction: column;
-    padding-block-end: .3ch;
+    padding-block-end: 0.3ch;
 
     p {
       margin-block: 0;
@@ -199,7 +200,6 @@ footer:not(dialog header) {
   nav {
     display: flex;
     align-items: center;
-
   }
 }
 button {
@@ -365,7 +365,7 @@ kbd {
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 
-  [data-testid="dropdown-trigger"] {
+  [data-testid='dropdown-trigger'] {
     display: block;
     width: 100%;
   }
