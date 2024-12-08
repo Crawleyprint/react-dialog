@@ -13,8 +13,8 @@
     "./style.css": "./dist/style.css"
   },
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "@floating-ui/react-dom": "^2.1.0"
+    "@floating-ui/react-dom": "^2.1.0",
+    "react": ">=18.0.0"
   },
   "devDependencies": {
     "@floating-ui/react-dom": "^2.1.2",
