@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": ".",
     "jsx": "preserve",
     "allowJs": true,
     "esModuleInterop": true,
@@ -30,7 +29,11 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
+    "../homepage/**/*",
+    "../../packages/server-rendered-example/.next/types/**/*.ts",
+    "../../dist/packages/server-rendered-example/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
+  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
