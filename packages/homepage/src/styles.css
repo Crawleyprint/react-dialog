@@ -255,15 +255,31 @@ kbd {
   margin-block: 5px;
 }
 
-/* Override calendar styles */
-.rdp-button {
-  box-shadow: none !important;
+dialog {
+  .rdp-root {
+    --rdp-selected-border: var(--site-primary-color-2);
+    --rdp-accent-color: var(--site-primary-color-2);
+  }
+  /* Override calendar styles */
+  .rdp-button, .rdp-day_button {
+    box-shadow: none;
+  }
+  .rdp-button_next, .rdp-button_previous {
+    box-shadow: none !important;
+  }
+
+  .rdp-today {
+    color: var(--site-secondary-color-2) !important;
+  }
+
+  .rdp-selected {
+    background-color: var(--site-secondary-color-2) !important;
+    border-radius: 50%;
+    color: var(--site-primary-color-2) !important;
+  }
+
 }
-.rdp-day_selected,
-.rdp-day_selected:focus-visible,
-.rdp-day_selected:hover {
-  background-color: var(--site-secondary-color-1) !important;
-}
+
 
 @keyframes link-hover {
   0% {
