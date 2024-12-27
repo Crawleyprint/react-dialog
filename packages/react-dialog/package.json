@@ -10,7 +10,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/index.css"
   },
   "peerDependencies": {
     "@floating-ui/react-dom": "^2.1.0",
