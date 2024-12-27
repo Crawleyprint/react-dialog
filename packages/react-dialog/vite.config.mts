@@ -51,9 +51,6 @@ export default defineConfig({
     watch: false,
     globals: true,
     setupFiles: '../../setupTests.ts',
-    cache: {
-      dir: '../../node_modules/.vitest/packages/react-dialog',
-    },
     environment: 'happy-dom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 
