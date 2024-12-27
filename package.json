@@ -15,7 +15,7 @@
     "@nx/react": "20.3.0",
     "@nx/vite": "20.3.0",
     "@nx/web": "20.3.0",
-    "@playwright/test": "^1.47.2",
+    "@playwright/test": "^1.49.1",
     "@swc-node/register": "1.10.9",
     "@swc/cli": "~0.4.1-nightly.20240914",
     "@swc/core": "1.7.28",
