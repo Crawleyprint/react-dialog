@@ -6,7 +6,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   root: __dirname,
-  base: 'react-dialog',
+  base: '/react-dialog',
   cacheDir: '../../node_modules/.vite/packages/homepage',
 
   server: {
