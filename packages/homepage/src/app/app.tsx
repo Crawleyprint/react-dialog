@@ -35,7 +35,7 @@ export function App() {
                 key={url + index}
                 tabIndex={0}
                 className={`${styles['plain-link']} ${getNavLinkClasses(
-                  styles
+                  styles,
                 )}`}
                 to={url}
               >
