@@ -1,6 +1,6 @@
 import styles from './app.module.css';
 import '@crawleyprint/react-dialog/style.css';
-import 'react-day-picker/dist/style.css';
+import 'react-day-picker/style.css';
 import { Route, Routes, NavLink } from 'react-router-dom';
 
 import Index from './pages/Index';
