@@ -1,5 +1,5 @@
 /*eslint-disable @nx/enforce-module-boundaries */
-import 'react-day-picker/dist/style.css';
+import 'react-day-picker/style.css';
 import Dialog from 'homepage/app/pages/Index';
 import Dropdown from 'homepage/app/pages/Dropdown';
 import Embeds from 'homepage/app/pages/EmbedAnything';
